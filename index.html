@@ -72,7 +72,7 @@ header.top .hero-text{display:grid;gap:14px;min-width:0}
 .topnav a{flex:none;color:var(--sea-ink);text-decoration:none;font-weight:700;font-size:14px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);white-space:nowrap}
 .topnav a:hover,.topnav a:focus-visible{background:var(--star);color:#1b1400}
 [id]{scroll-margin-top:64px}
-@media (max-width:640px){.rows{display:grid;gap:6px}.group{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;padding-bottom:2px}.group::-webkit-scrollbar{display:none}.group .chip{flex:none}.count{font-size:13px}}.news-tag.alerta{background:var(--s2bg);color:var(--s2)}.navshare{margin-left:auto;flex:none;font:inherit;font-weight:700;font-size:14px;border:0;border-radius:999px;padding:7px 13px;background:var(--star);color:#1b1400;cursor:pointer;white-space:nowrap}
+.news-tag.alerta{background:var(--s2bg);color:var(--s2)}.navshare{margin-left:auto;flex:none;font:inherit;font-weight:700;font-size:14px;border:0;border-radius:999px;padding:7px 13px;background:var(--star);color:#1b1400;cursor:pointer;white-space:nowrap}
 .navshare:hover{filter:brightness(1.08)}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 h1{font-size:clamp(30px,6vw,52px);font-weight:800;line-height:1.02}
 .lead{max-width:62ch;font-size:17px;opacity:.95;margin:0}
@@ -131,7 +131,46 @@ footer{border-top:1px solid var(--line)}
 footer .wrap{padding-block:20px 30px;font-size:13px;color:var(--muted);display:grid;gap:6px}
 @media (max-width:520px){.facts{grid-template-columns:1fr 1fr 1fr}.card h3{font-size:18px}}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s ease}.card:hover{transform:translateY(-2px)}}
-</style>
+/* --- Más fácil y accesible --- */
+body{font-size:17px}
+.topnav .wrap{flex-wrap:wrap;overflow:visible;align-items:center}
+.navtools{margin-left:auto;display:flex;gap:6px;flex:none}
+.navbtn{font:inherit;font-weight:800;font-size:15px;min-width:42px;min-height:36px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(255,255,255,.1);color:var(--sea-ink);cursor:pointer}
+.navbtn:disabled{opacity:.4;cursor:default}
+.navbtn:hover:not(:disabled){background:var(--star);color:#1b1400}
+.navshare{margin-left:0}
+.bar .wrap{padding-block:18px 14px;display:grid;gap:12px}
+.bar-title{font-size:clamp(21px,3vw,26px);font-weight:800}
+.step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.num{width:34px;height:34px;border-radius:50%;background:var(--sea);color:var(--sea-ink);font-family:var(--display);font-weight:800;font-size:18px;display:grid;place-items:center}
+.stepbody{display:grid;gap:6px;min-width:0}
+.q{margin:0;font-weight:700;font-size:17px}
+.group{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font:inherit;font-size:15px;border:2px solid transparent;border-radius:999px;padding:8px 14px;background:var(--chip);color:var(--ink);cursor:pointer;min-height:44px}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);font-weight:700}
+.chip[aria-pressed="true"]::before{content:"✓ "}
+.chip:hover{border-color:var(--sea)}
+.resultbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
+.count{margin:0;font-size:18px;font-weight:700;color:var(--ink)}
+.reset{font:inherit;font-size:15px;font-weight:700;min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--s2);background:var(--surface);color:var(--s2);cursor:pointer}
+.more{display:block;margin:18px auto 0;font:inherit;font-size:17px;font-weight:700;min-height:52px;padding:12px 26px;border-radius:999px;border:0;background:var(--sea);color:var(--sea-ink);cursor:pointer}
+.empty p{margin:0 0 10px;font-size:17px}
+.tag{font-size:14px;padding:4px 10px}
+.what{font-size:16px}
+.facts small{font-size:12px;letter-spacing:0;text-transform:none}
+.facts strong{font-size:16px}
+.btns .go:first-child{flex:1 1 180px;justify-content:center;font-size:16px;padding:12px 16px;min-height:48px}
+.go{min-height:44px}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--star);color:#1b1400;font-weight:800;text-decoration:none;border-radius:999px;padding:12px 18px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (max-width:640px){.topnav a{font-size:13px;padding:6px 10px}.navtools{margin-left:0}.chip{font-size:15px}.card h3{font-size:19px}.badge{width:96px}header.top .wrap{padding-block:18px 16px}}/* --- Resaltar "La celiaquía en un minuto" --- */
+section[aria-labelledby="h-celi"]{background:var(--s3bg);border:2px solid var(--star);border-radius:20px;padding:22px clamp(16px,3vw,28px)}
+section[aria-labelledby="h-celi"] h2{font-size:clamp(26px,4vw,34px)}
+section[aria-labelledby="h-celi"] .sub{font-size:17px;color:var(--ink)}
+.topnav a[href="#h-celi"]{background:var(--star);color:#1b1400}
+.celi-link{justify-self:start;display:inline-flex;align-items:center;gap:6px;background:var(--star);color:#1b1400;font-weight:800;font-size:16px;text-decoration:none;border-radius:999px;padding:10px 18px;min-height:44px}
+.celi-link:hover{filter:brightness(1.08)}/* --- Ajustes: hueco bajo el menú y botón Compartir --- */
+[id]{scroll-margin-top:calc(var(--navh,64px) + 12px)}
+.topnav .navshare{background:var(--star);color:#1b1400;border:0;font-size:14px;font-weight:800;padding:7px 14px;border-radius:999px;min-height:36px}</style>
 
 <style>
 html{-webkit-text-size-adjust:100%}
@@ -144,16 +183,17 @@ img{max-width:100%}[hidden]{display:none!important}
 @media print{.bar,.sharebar,.go{display:none!important}.card{break-inside:avoid}}
 </style>
 </head>
-<body><header class="top">
+<body><header class="top" id="top">
   <div class="wrap hero"><div class="hero-text">
     <h1>Disfruta de la vida sin gluten</h1>
-    <p class="lead">Aquí están los sitios donde podemos comer tranquilos, con estrellas según lo seguros que son.</p>
+    <p class="lead">Aquí están los sitios donde podemos comer tranquilos. Elige abajo dónde y qué os apetece, y pulsa «📍 Cómo llegar». Las estrellas dicen lo seguro que es cada sitio:</p>
     <div class="legend" aria-label="Qué significan las estrellas">
       <span><b>★★★★★</b> Todo es sin gluten</span>
       <span><b>★★★★</b> Certificado por la asociación</span>
       <span><b>★★★</b> Cocinan aparte</span>
       <span><b>★★</b> Tienen platos; preguntar</span>
     </div>
+    <a class="celi-link" href="#h-celi">🌾 ¿Qué es la celiaquía? Léelo en un minuto</a>
   </div>
     <svg class="badge" viewBox="0 0 200 200" role="img" aria-label="Símbolo sin gluten: espiga de trigo tachada">
       <defs><path id="sg-ring" d="M100,100 m-79,0 a79,79 0 1,1 158,0 a79,79 0 1,1 -158,0"/></defs>
@@ -174,36 +214,38 @@ img{max-width:100%}[hidden]{display:none!important}
       <line class="slash" x1="146" y1="54" x2="54" y2="146" stroke="var(--star)" stroke-width="8" stroke-linecap="round"/>
     </svg>  </div>
 </header>
-<nav class="topnav" aria-label="Secciones de la guía">
+<nav class="topnav" aria-label="Menú de la guía">
   <div class="wrap">
-    <a href="#buscar">Búsqueda</a>
-    <a href="#h-celi">La celiaquía en un minuto</a>
-    <a href="#h-news">Noticias y novedades</a>
-    <a href="#h-redes">Para seguir en redes</a>
-    <button class="navshare copy" type="button" data-copy="https://oscarcarcedo.github.io/disfruta-sin-gluten/" title="Copia el enlace para pegarlo en WhatsApp, Instagram o un correo">Compartir esta guía</button>
+    <a href="#buscar">🔎 Buscar sitio</a>
+    <a href="#h-celi">🌾 Qué es la celiaquía</a>
+    <a href="#h-news">📰 Noticias</a>
+    <a href="#h-redes">📱 Redes</a>
+    <span class="navtools">
+      <button class="navbtn" id="txt-minus" type="button" aria-label="Letra más pequeña" title="Letra más pequeña">A−</button>
+      <button class="navbtn" id="txt-plus" type="button" aria-label="Letra más grande" title="Letra más grande">A+</button>
+      <button class="navshare copy" type="button" data-copy="https://oscarcarcedo.github.io/disfruta-sin-gluten/" title="Copia el enlace para pegarlo en WhatsApp, Instagram o un correo">🔗 Compartir</button>
+    </span>
   </div>
-</nav>
-<div class="bar" id="buscar">
+</nav><section class="bar" id="buscar" aria-labelledby="h-buscar">
   <div class="wrap">
-    <div class="rows">
-      <div class="group" id="g-zona"><span class="lab">Zona</span></div>
-      <div class="group" id="g-cat"><span class="lab">Para</span></div>
-      <div class="group" id="g-min"><span class="lab">Confianza</span></div>
-      <div class="group"><button class="chip" id="kids" aria-pressed="false">Bueno con niños</button></div>
-      <span class="count" id="count"></span>
-    </div>
+    <h2 id="h-buscar" class="bar-title">Busca dónde comer en 3 pasos</h2>
+    <div class="step"><span class="num" aria-hidden="true">1</span><div class="stepbody"><p class="q">¿Dónde?</p><div class="group" id="g-zona" role="group" aria-label="Zona"></div></div></div>
+    <div class="step"><span class="num" aria-hidden="true">2</span><div class="stepbody"><p class="q">¿Qué os apetece?</p><div class="group" id="g-cat" role="group" aria-label="Qué os apetece"></div></div></div>
+    <div class="step"><span class="num" aria-hidden="true">3</span><div class="stepbody"><p class="q">¿Cuánta seguridad queréis?</p><div class="group" id="g-min" role="group" aria-label="Seguridad"></div><div class="group"><button class="chip" id="kids" type="button" aria-pressed="false">👶 Solo sitios buenos con niños</button></div></div></div>
+    <div class="resultbar"><p class="count" id="count" aria-live="polite"></p><button class="reset" id="reset" type="button" hidden>✕ Quitar filtros</button></div>
   </div>
-</div>
-
+</section>
+<a href="#top" class="totop" id="totop" hidden>↑ Arriba</a>
 <main>
   <div class="wrap">
     <div>
       <div class="grid" id="grid"></div>
-      <div class="empty" id="empty" hidden>No hay sitios con estos filtros. Prueba a quitar alguno.</div>
+      <div class="empty" id="empty" hidden><p>No hay sitios con estos filtros.</p><button class="reset" id="empty-reset" type="button">✕ Quitar filtros</button></div>
+      <button class="more" id="more" type="button" hidden>Ver más sitios</button>
     </div>
 
     <section aria-labelledby="h-celi">
-      <h2 id="h-celi">La celiaquía en un minuto</h2>
+      <h2 id="h-celi">🌾 La celiaquía en un minuto</h2>
       <p class="sub">Para familia, amigos y restaurantes que nos invitan.</p>
       <div class="two">
         <div class="box">
@@ -355,14 +397,41 @@ const P = [
  {n:"En Tiempos de Maricastaña",z:"burgos",city:"Burgos",a:"Espolón",c:"comer",s:4,q:"Gastrobar junto a la Catedral. Forma parte de la Asociación de Celíacos",p:"20–30 €",g:"",f:"",cel:"8,9/10 (37)",m:"En Tiempos de Maricastana Paseo del Espolon 10 Burgos"},
  {n:"Carmen Restaurante",z:"burgos",city:"Burgos",a:"",c:"comer",s:4,q:"Casi toda la carta adaptada, también hamburguesas; pan sin gluten. En la guía de Celíacos Burgos",p:"20–30 €",g:"",f:"",cel:"9,3/10 (3)",m:"Carmen Restaurante Jose Maria Codon 9 Burgos"},
  {n:"Bodegas San Blas",z:"burgos",city:"Lerma",a:"",c:"comer",s:3,q:"Muchos platos marcados sin gluten, pan sin gluten y fritura en aceite limpio",p:"20–35 €",g:"",f:"",m:"Bodegas San Blas Lerma"},
- {n:"Villa Trajano",z:"burgos",city:"Burgos",a:"",c:"comer",s:2,q:"Italiano: pasta, pizza y risotto sin gluten",p:"10–20 €",g:"",f:"",cel:"9,4/10 (6)",m:"Villa Trajano Reyes Catolicos 8 Burgos",k:1},
+ {n:"Villa Trajano",z:"burgos",city:"Burgos",a:"Av. Reyes Católicos 8",c:"comer",s:4,q:"Italiano: muchas pizzas y 3 pastas sin gluten; pan sin gluten. En la guía de Celíacos Burgos",p:"Menú 18 € · fin de semana 26 €",g:"",f:"",cel:"9,4/10 (6)",m:"Villa Trajano Reyes Catolicos 8 Burgos",k:1},
  {n:"Hammmbur",z:"burgos",city:"Burgos",a:"",c:"comer",s:2,q:"Hamburguesas aptas para celíacos",p:"12–20 €",g:"",f:"",cel:"8,1/10 (10)",m:"Hammmbur San Lorenzo 29 Burgos",k:1},
- {n:"Casa Álvaro",z:"burgos",city:"Burgos",a:"",c:"comer",s:2,q:"Años ofreciendo menús sin gluten",p:"20–35 €",g:"",f:"",cel:"8,5/10 (3)",m:"Restaurante Casa Alvaro Trujillo 3 Burgos"},
+ {n:"Casa Álvaro",z:"burgos",city:"Burgos",a:"C/ Trujillo 3",c:"comer",s:4,q:"Cocina tradicional; conocen bien la dieta sin gluten y tienen pan sin gluten. Cierra domingos. En la guía de Celíacos Burgos",p:"Menú 14 € · sábados 28 €",g:"",f:"",cel:"8,5/10 (3)",m:"Restaurante Casa Alvaro Trujillo 3 Burgos"},
  {n:"Heladería La Fresquera",z:"burgos",city:"Burgos",a:"",c:"desayuno",s:2,q:"Helados y cucuruchos sin gluten",p:"3–8 €",g:"",f:"",m:"Heladeria La Fresquera Lain Calvo 7 Burgos",k:1},
  {n:"Casa Florencio",z:"burgos",city:"Aranda de Duero",a:"",c:"comer",s:2,q:"Asador: lechazo; casi toda la carta sin gluten",p:"30–45 €",g:"",f:"",m:"Casa Florencio Isilla 14 Aranda de Duero"},
  {n:"Los Claveles",z:"burgos",city:"Ibeas de Juarros",a:"",c:"comer",s:2,q:"Comida casera; la cocinera es celíaca",p:"15–25 €",g:"",f:"",m:"Los Claveles Ibeas de Juarros"},
  {n:"Sumendi Pastelería",z:"espana",city:"Frómista (Palencia)",a:"",c:"tienda",s:5,q:"Panadería sin gluten; napolitanas (visto en @burgossingluten)",p:"3–8 €",g:"",f:"",m:"Sumendi pasteleria Fromista"},
  {n:"La Cañía",z:"espana",city:"Santander",a:"El Sardinero",c:"comer",s:3,q:"Carta sin gluten; el mejor arroz según @burgossingluten",p:"20–35 €",g:"",f:"",m:"Restaurante La Cania Santander"},
+ // Burgos: guía "Dónde comer" de Celíacos Burgos (celiacosburgos.org)
+ {n:"Casa Avelino",z:"burgos",city:"Burgos",a:"C/ Emperador 58",c:"comer",s:4,q:"Cocina de siempre con carta específica sin gluten; pan, postres y cerveza sin gluten. En la guía de Celíacos Burgos",p:"Menú 18 € · carta 25–40 €",g:"",f:"",m:"Casa Avelino Emperador 58 Burgos"},
+ {n:"Maridaje's",z:"burgos",city:"Burgos",a:"C/ San Cosme 22",c:"comer",s:4,q:"Cocina tradicional apta para celíacos; pan, cerveza y chuches sin gluten. En la guía de Celíacos Burgos",p:"Menú 15–19,50 €",g:"",f:"",cel:"7,8/10 (4)",m:"Restaurante Maridajes San Cosme 22 Burgos",k:1},
+ {n:"Aura Gastronómica",z:"burgos",city:"Burgos",a:"P.º Pintor Javier Cortes 2",c:"comer",s:4,q:"Cocina creativa con opciones sin gluten. Se unió a la guía de Celíacos Burgos en 2025",p:"20–35 €",g:"",f:"",m:"Aura Gastronomica Paseo Pintor Javier Cortes 2 Burgos"},
+ {n:"Asador San Lorenzo",z:"burgos",city:"Burgos",a:"Ctra. de Poza 81",c:"comer",s:4,q:"Cordero lechal en horno de leña; carta y menús adaptados, pan y cerveza sin gluten",p:"Menús desde 30 €",g:"",f:"",m:"Asador San Lorenzo Carretera Poza 81 Burgos"},
+ {n:"Blue Gallery",z:"burgos",city:"Burgos",a:"P.º Comuneros de Castilla 19",c:"comer",s:4,q:"Cocina de mercado y fusión. Reservar antes el menú sin gluten. Cierra domingos",p:"30–45 €",g:"",f:"",m:"Blue Gallery Paseo Comuneros de Castilla 19 Burgos"},
+ {n:"NH Collection Palacio de Burgos",z:"burgos",city:"Burgos",a:"C/ La Merced 13",c:"comer",s:4,q:"Cocina de producto; platos sin gluten señalados en la carta y pan sin gluten",p:"Menú 28 € · carta 45 €",g:"",f:"",m:"NH Collection Palacio de Burgos La Merced 13"},
+ {n:"Hotel Braseros",z:"burgos",city:"Burgos",a:"C/ Severo Ochoa 7 bis",c:"comer",s:4,q:"Menú apto para celíacos; pan, pasta y cerveza sin gluten",p:"15–30 €",g:"",f:"",m:"Hotel Braseros Severo Ochoa Burgos"},
+ {n:"Hotel Centro Braseros",z:"burgos",city:"Burgos",a:"Avda. del Cid 2 bis",c:"comer",s:4,q:"Menú apto para celíacos; pan, pasta y cerveza sin gluten",p:"15–30 €",g:"",f:"",m:"Hotel Centro Braseros Avenida del Cid 2 Burgos"},
+ {n:"Belgius Heladería",z:"burgos",city:"Burgos",a:"C/ San Juan 19",c:"desayuno",s:4,q:"Helados, crepes, chocolates y batidos: todo apto para celíacos",p:"2–6 €",g:"",f:"",m:"Belgius Heladeria San Juan 19 Burgos",k:1},
+ {n:"Ludik",z:"burgos",city:"Burgos",a:"C/ Duque de Frías 27",c:"comer",s:4,q:"Ocio infantil: cumpleaños y comedor con menú para celíacos hecho aparte",p:"—",g:"",f:"",m:"Ludik Duque de Frias 27 Burgos",k:1},
+ {n:"Restaurante COCO Group",z:"burgos",city:"Cardeñajimeno",a:"Ctra. Fuentes Blancas km 3",c:"comer",s:4,q:"Banquetes y asador; pan, cerveza y repostería sin gluten. Mejor reservar",p:"~25 €",g:"",f:"",m:"Restaurante Coco Group Cardenajimeno"},
+ {n:"Hotel Rey Arturo",z:"burgos",city:"Villagonzalo Pedernales",a:"A-62 km 6,6",c:"comer",s:4,q:"Menú diario sin gluten",p:"10,50–40 €",g:"",f:"",m:"Hotel Rey Arturo Villagonzalo Pedernales"},
+ {n:"Sabinares del Arlanza",z:"burgos",city:"Puentedura",a:"",c:"comer",s:4,q:"Hotel rural: comidas por encargo con menú sin gluten sin coste extra",p:"—",g:"",f:"",m:"Sabinares del Arlanza Puentedura"},
+ {n:"Los Rastrojos",z:"burgos",city:"Aranda de Duero",a:"Ctra. Peñaranda km 4,5",c:"comer",s:4,q:"Asador; terminan el pan sin gluten en el horno de leña",p:"~40 €",g:"",f:"",m:"Restaurante Los Rastrojos Aranda de Duero"},
+ {n:"Torre Berrueza",z:"burgos",city:"Espinosa de los Monteros",a:"",c:"comer",s:4,q:"Cocina casera con menú específico para celíacos",p:"30–40 €",g:"",f:"",m:"Torre Berrueza Espinosa de los Monteros"},
+ {n:"Hotel Mesón del Cid",z:"burgos",city:"Burgos",a:"Plaza Santa María 8 (Catedral)",c:"comer",s:3,q:"Cocina castellana; adaptan los platos al decir que sois celíacos; pan sin gluten",p:"25–40 €",g:"",f:"",m:"Hotel Meson del Cid Plaza Santa Maria 8 Burgos"},
+ {n:"La Abbadía (Hotel Abba)",z:"burgos",city:"Burgos",a:"C/ Fernán González 72",c:"comer",s:3,q:"Adaptan los menús al momento; pan sin gluten",p:"20–35 €",g:"",f:"",m:"Hotel Abba Burgos Fernan Gonzalez 72"},
+ {n:"Hotel Rice Palacio de los Blasones",z:"burgos",city:"Burgos",a:"C/ Fernán González 6",c:"comer",s:3,q:"Cocina regional creativa; pan sin gluten",p:"Menú 19 €",g:"",f:"",m:"Hotel Rice Palacio de los Blasones Burgos"},
+ {n:"La Mafia se sienta a la mesa",z:"burgos",city:"Burgos",a:"C/ Laín Calvo 50",c:"comer",s:2,q:"Italiano con dos pastas aptas. En la guía de Celíacos Burgos desde 2016, pero hay quejas de información confusa: preguntad",p:"15–25 €",g:"",f:"",m:"La Mafia Lain Calvo 50 Burgos",k:1},
+ {n:"Hotel La Galería",z:"burgos",city:"Quintanadueñas",a:"",c:"comer",s:3,q:"Cocina tradicional; pan sin gluten y parque infantil",p:"~35 €",g:"",f:"",m:"Hotel La Galeria Quintanaduenas",k:1},
+ {n:"Braseros Restaurante",z:"burgos",city:"Burgos (Ctra. Logroño)",a:"",c:"comer",s:3,q:"Celebraciones junto al Camino de Santiago, cerca de Atapuerca",p:"25–40 €",g:"",f:"",m:"Braseros Restaurante Carretera Logrono km 102 Burgos"},
+ {n:"Saltimban-Kid",z:"burgos",city:"Burgos",a:"Av. de Palencia 33 y Av. Eladio Perlado 55",c:"comer",s:3,q:"Ocio infantil y celebraciones; adaptan el menú a celíacos",p:"—",g:"",f:"",m:"Saltimban Kid Burgos",k:1},
+ {n:"Smöoy",z:"burgos",city:"Burgos",a:"C/ Cardenal Segura 1",c:"desayuno",s:3,q:"Helado de yogur con base sin gluten; tienen lista de alérgenos",p:"3–6 €",g:"",f:"",m:"Smooy Cardenal Segura Burgos",k:1},
+ {n:"Morcillas de Cardeña",z:"burgos",city:"Burgos",a:"",c:"tienda",s:4,q:"Morcilla de Burgos. En la lista \"Dónde comprar\" de Celíacos Burgos",p:"—",g:"",f:"",m:"Morcillas de Cardena Burgos"},
+ {n:"Al Peso Alimentación",z:"burgos",city:"Burgos",a:"",c:"tienda",s:4,q:"Alimentación a granel. En la lista \"Dónde comprar\" de Celíacos Burgos",p:"—",g:"",f:"",m:"Al Peso Alimentacion Burgos"},
+ {n:"Corte y Sazón",z:"burgos",city:"Burgos",a:"",c:"tienda",s:4,q:"Carnicería. En la lista \"Dónde comprar\" de Celíacos Burgos",p:"—",g:"",f:"",m:"Corte y Sazon carniceria Burgos"},
  // España
  {n:"El Fartuquín",z:"espana",city:"Oviedo",a:"",c:"comer",s:5,q:"Fabada, cachopo y frixuelos. Nº1 de España 2026",p:"20–30 €",g:"",f:"",cel:"9,6/10 (154)",m:"El Fartuquin Carpio 19 Oviedo",k:1},
  {n:"Miracle",z:"espana",city:"Valencia",a:"",c:"comer",s:5,q:"Mediterránea con toque sirio. Nº2 de España",p:"20–35 €",g:"",f:"",cel:"9,8/10 (153)",m:"El Miracle Campoamor 42 Valencia"},
@@ -429,13 +498,15 @@ const SO=[
  ["@singlucetas (TikTok)","Elena, celíaca: recetas sin gluten y pintxos. 1 millón de \"me gusta\"","88.400","https://www.tiktok.com/@singlucetas","España"], ["@asturceliaca","Sin gluten en Asturias","6.100","https://www.instagram.com/asturceliaca/","España"],
  ["@glutenfreedonostia","Comer sin gluten en Donostia (sin publicar desde 2025)","1.158","https://www.instagram.com/glutenfreedonostia/","Euskadi"],
  ["@singlucetas","Pintxos sin gluten (sin publicar desde 2025)","3.680","https://www.instagram.com/singlucetas/","Euskadi"]];
-const TYPE={5:["Todo sin gluten","t5"],4:["Certificado","t4"],3:["Cocinan aparte","t3"],2:["Preguntar antes","t2"]};
-const ZONAS=[["gipuzkoa","Gipuzkoa"],["euskadi","Resto de Euskadi"],["burgos","Burgos y provincia"],["espana","Resto de España"],["all","Todo"]];
-const CATS=[["all","Todo"],["desayuno","Desayunar y merendar"],["pintxos","Pintxos"],["comer","Comer y cenar"],["tienda","Tiendas"]];
-const MINS=[[2,"Todas"],[3,"★★★ o más"],[4,"★★★★ o más"],[5,"Solo ★★★★★"]];
+const TYPE={5:["100% sin gluten","t5"],4:["Certificado: muy seguro","t4"],3:["Cocinan aparte: seguro","t3"],2:["Tienen opciones: preguntad","t2"]};
+const ZONAS=[["gipuzkoa","Gipuzkoa"],["euskadi","Resto de Euskadi"],["burgos","Burgos y provincia"],["espana","Resto de España"],["all","Todas las zonas"]];
+const CATS=[["all","Todo"],["desayuno","☕ Desayunar y merendar"],["pintxos","🍢 Pintxos y picoteo"],["comer","🍽️ Comer y cenar"],["tienda","🛒 Tiendas y panaderías"]];
+const MINS=[[2,"Todos los sitios"],[4,"Muy seguros (★★★★ o más)"],[5,"Solo 100% sin gluten"]];
 const st={z:"gipuzkoa",c:"all",min:2,kids:false,q:""};
 try{const s=JSON.parse(localStorage.getItem("sg-filtros")||"null"); if(s) Object.assign(st,s,{q:""});}catch(e){}
 if(!ZONAS.some(([v])=>v===st.z)) st.z="gipuzkoa";
+if(!MINS.some(([v])=>v===st.min)) st.min=2;
+const PAGE=12; let shown=PAGE;
 
 const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const stars=n=>`<span class="stars" aria-label="${n} estrellas de confianza"><span class="on">${"★".repeat(n)}</span><span class="off">${"★".repeat(5-n)}</span></span>`;
@@ -445,10 +516,26 @@ const maps=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURICompon
 function chips(id,list,key){
   const g=document.getElementById(id);
   list.forEach(([v,l])=>{const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=l;b.dataset.v=v;
-    b.addEventListener("click",()=>{st[key]=key==="min"?+v:v;render();});g.appendChild(b);});
+    b.addEventListener("click",()=>{st[key]=key==="min"?+v:v;shown=PAGE;render();});g.appendChild(b);});
 }
 chips("g-zona",ZONAS,"z");chips("g-cat",CATS,"c");chips("g-min",MINS,"min");
-document.getElementById("kids").addEventListener("click",()=>{st.kids=!st.kids;render();});
+document.getElementById("kids").addEventListener("click",()=>{st.kids=!st.kids;shown=PAGE;render();});
+function resetFilters(){st.c="all";st.min=2;st.kids=false;shown=PAGE;render();}
+document.getElementById("reset").addEventListener("click",resetFilters);
+document.getElementById("empty-reset").addEventListener("click",resetFilters);
+document.getElementById("more").addEventListener("click",()=>{shown+=PAGE;render();});
+// Tamaño de letra (se recuerda)
+const ZOOMS=[1,1.15,1.3]; let zi=0;
+try{zi=Math.min(2,Math.max(0,+localStorage.getItem("sg-letra")||0));}catch(e){}
+function applyZoom(){document.body.style.zoom=ZOOMS[zi];if(typeof setNavH==="function")setTimeout(setNavH,0);document.getElementById("txt-minus").disabled=zi===0;document.getElementById("txt-plus").disabled=zi===ZOOMS.length-1;try{localStorage.setItem("sg-letra",zi);}catch(e){}}
+document.getElementById("txt-plus").addEventListener("click",()=>{if(zi<ZOOMS.length-1){zi++;applyZoom();}});
+document.getElementById("txt-minus").addEventListener("click",()=>{if(zi>0){zi--;applyZoom();}});
+applyZoom();
+// Hueco para que el menú fijo no tape los títulos
+function setNavH(){const n=document.querySelector(".topnav");if(n)document.documentElement.style.setProperty("--navh",n.offsetHeight+"px");}
+setNavH(); addEventListener("resize",setNavH);// Botón volver arriba
+const totop=document.getElementById("totop");
+addEventListener("scroll",()=>{totop.hidden=scrollY<700;},{passive:true});
 
 function fact(label,val){return val?`<div><small>${label}</small><strong>${esc(val)}</strong></div>`:`<div><small>${label}</small><strong>—</strong></div>`;}
 function render(){
@@ -460,20 +547,25 @@ function render(){
   const list=P.filter(p=>(st.z==="all"||p.z===st.z)&&(st.c==="all"||p.c===st.c)&&p.s>=st.min&&(!st.kids||p.k)
     &&(!q||norm([p.n,p.city,p.a,p.q].join(" ")).includes(q)))
     .sort((a,b)=>b.s-a.s);
+  const total=list.length; const visible=list.slice(0,shown);
   const grid=document.getElementById("grid");
-  grid.innerHTML=list.map(p=>{
+  grid.innerHTML=visible.map(p=>{
     const [tl,tc]=TYPE[p.s];
     const nota=p.g||p.gr||p.cel||"";
-    const notaLab=p.cel?"Celicidad":p.gr?"Nota /10":"Nota";
+    const notaLab=p.cel?"Nota Celicidad":p.gr?"Nota (sobre 10)":"Nota Google";
     return `<article class="card">
       <div class="head"><div><h3>${esc(p.n)}</h3><div class="where">${esc(p.city)}${p.a?" · "+esc(p.a):""}</div></div>${stars(p.s)}</div>
       <div><span class="tag ${tc}">${tl}</span></div>
       <p class="what">${esc(p.q)}</p>
-      <div class="facts">${fact("€/persona",p.p)}${fact(notaLab,nota)}${fact("Nota celíacos",p.f)}</div>
-      <div class="btns"><a class="go" href="${maps(p.m)}" target="_blank" rel="noopener">Cómo llegar</a>${p.web?`<a class="go" href="${p.web}" target="_blank" rel="noopener">Tienda online</a>`:""}${p.k?`<span class="kid">Bueno con niños</span>`:""}</div>
+      <div class="facts">${fact("Precio por persona",p.p)}${fact(notaLab,nota)}${fact("Nota de celíacos",p.f)}</div>
+      <div class="btns"><a class="go" href="${maps(p.m)}" target="_blank" rel="noopener">📍 Cómo llegar</a>${p.web?`<a class="go" href="${p.web}" target="_blank" rel="noopener">🛒 Tienda online</a>`:""}${p.k?`<span class="kid">👶 Bueno con niños</span>`:""}</div>
     </article>`;}).join("");
   document.getElementById("empty").hidden=list.length>0;
-  document.getElementById("count").textContent=list.length+(list.length===1?" sitio":" sitios");
+  const zl=(ZONAS.find(([v])=>v===st.z)||["","todas las zonas"])[1];
+  document.getElementById("count").textContent=total===0?"No hay sitios con estos filtros":"Hay "+total+(total===1?" sitio":" sitios")+(st.z==="all"?"":" en "+zl);
+  document.getElementById("reset").hidden=!(st.c!=="all"||st.min!==2||st.kids);
+  const more=document.getElementById("more"); const left=total-visible.length;
+  more.hidden=left<=0; more.textContent="Ver más sitios (quedan "+left+")";
 }
 function rows(id,arr){document.getElementById(id).innerHTML=arr.map(([n,s,d])=>`<div class="row">${stars(s)}<div><div class="n">${esc(n)}</div><div class="d">${esc(d)}</div></div><span></span></div>`).join("");}
 const NEWS=[
