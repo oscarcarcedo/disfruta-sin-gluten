@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Restaurantes, pintxos y tiendas sin gluten en Donostia, Gipuzkoa y España, con estrellas de confianza para celíacos.">
+<meta property="og:title" content="Disfruta de la vida sin gluten">
+<meta property="og:description" content="Guía para celíacos: restaurantes, pintxos y tiendas con estrellas de confianza, precios y mapa.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oscarcarcedo.github.io/disfruta-sin-gluten/">
+<meta name="theme-color" content="#0e4d48">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e4d48'/%3E%3Cpath d='M32 9l6.6 13.4 14.8 2.2-10.7 10.4 2.5 14.7L32 42.8 18.8 49.7l2.5-14.7L10.6 24.6l14.8-2.2z' fill='%23f2b632'/%3E%3C/svg%3E"><title>Disfruta de la vida sin gluten</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: app-like guide. Header band (sea), filter bar, card grid of places; reference blocks below. */
+:root{
+  --bg:#f2f6f4; --surface:#ffffff; --ink:#132522; --muted:#55706b; --line:#d5e2dd;
+  --sea:#0e4d48; --sea-ink:#eaf5f2; --star:#d99a0b; --star-off:#cfdcd7;
+  --s5:#1d7a4e; --s5bg:#e3f3ea; --s4:#2763a5; --s4bg:#e5eef9; --s3:#8a5a00; --s3bg:#fbefd6; --s2:#8c4a3a; --s2bg:#f8e7e2;
+  --chip:#e6eeeb; --chip-on:#0e4d48; --chip-on-ink:#ffffff;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1716; --surface:#152321; --ink:#e4efec; --muted:#9db5af; --line:#26393a;
+  --sea:#123d3a; --sea-ink:#e4f3ef; --star:#f2b632; --star-off:#33494a;
+  --s5:#6fd39c; --s5bg:#163428; --s4:#8db9ef; --s4bg:#18283c; --s3:#f0c56a; --s3bg:#33291a; --s2:#eda592; --s2bg:#3a231d;
+  --chip:#1c2e2c; --chip-on:#6fd3bd; --chip-on-ink:#0d1716; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1716; --surface:#152321; --ink:#e4efec; --muted:#9db5af; --line:#26393a;
+  --sea:#123d3a; --sea-ink:#e4f3ef; --star:#f2b632; --star-off:#33494a;
+  --s5:#6fd39c; --s5bg:#163428; --s4:#8db9ef; --s4bg:#18283c; --s3:#f0c56a; --s3bg:#33291a; --s2:#eda592; --s2bg:#3a231d;
+  --chip:#1c2e2c; --chip-on:#6fd3bd; --chip-on-ink:#0d1716; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--star);outline-offset:2px}
+
+header.top{background:var(--sea);color:var(--sea-ink)}
+header.top .wrap{padding-block:28px 24px;display:grid;gap:14px}
+header.top .hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
+header.top .hero-text{display:grid;gap:14px;min-width:0}
+.badge{width:clamp(130px,20vw,210px);height:auto;display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,.25))}
+@media (max-width:640px){header.top .hero{grid-template-columns:1fr;gap:16px}.badge{width:120px;order:-1}}
+@media (prefers-reduced-motion:no-preference){.badge .slash{stroke-dasharray:130;stroke-dashoffset:130;animation:tachar .7s .3s ease-out forwards}@keyframes tachar{to{stroke-dashoffset:0}}}.foods{display:grid;gap:8px;margin-top:14px}
+.food{border-radius:12px;padding:10px 12px;display:grid;gap:3px}
+.food p{margin:0;font-size:15px}
+.food .fl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.food.no{background:var(--s2bg)} .food.no .fl{color:var(--s2)}
+.food.ojo{background:var(--s3bg)} .food.ojo .fl{color:var(--s3)}
+.food.si{background:var(--s5bg)} .food.si .fl{color:var(--s5)}.news{display:grid;gap:10px}
+.news-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.news-date{grid-row:span 3;font-family:var(--display);font-weight:800;font-size:15px;color:var(--sea);text-align:center;line-height:1.1;min-width:52px;padding-top:2px}
+.news-date small{display:block;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.news-acc{font-size:13px;font-weight:700;color:var(--muted)}
+.news-acc a{color:inherit}
+.news-t{font-weight:700;font-size:16px}
+.news-x{margin:0;font-size:15px}
+.news-tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1px 6px;margin-left:6px;background:var(--s3bg);color:var(--s3);vertical-align:1px}
+.news-more{justify-self:start}.sog{display:grid;gap:4px}
+.sog + .sog{margin-top:16px}
+.sog h3{font-size:16px;margin:0}
+.sog.hot{background:var(--s3bg);border-radius:12px;padding:12px 14px}
+.sog.hot h3{color:var(--s3)}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+h1{font-size:clamp(30px,6vw,52px);font-weight:800;line-height:1.02}
+.lead{max-width:62ch;font-size:17px;opacity:.95;margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.legend span{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 12px;font-size:14px}
+.legend b{color:var(--star);letter-spacing:1px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sea)}
+.bar .wrap{padding-block:12px;display:grid;gap:10px}
+.search{display:flex;gap:8px}
+.search input{flex:1;min-width:0;font:inherit;font-size:16px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.rows{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.group .lab{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.chip{font:inherit;font-size:14px;border:0;border-radius:999px;padding:7px 13px;background:var(--chip);color:var(--ink);cursor:pointer;min-height:36px}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);font-weight:700}
+.count{font-size:14px;color:var(--muted)}
+
+main .wrap{padding-block:22px 40px;display:grid;gap:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card h3{font-size:20px;font-weight:600;line-height:1.15}
+.where{font-size:14px;color:var(--muted)}
+.stars{font-size:20px;letter-spacing:2px;white-space:nowrap;line-height:1}
+.stars .on{color:var(--star)} .stars .off{color:var(--star-off)}
+.tag{display:inline-block;font-size:13px;font-weight:700;border-radius:8px;padding:3px 9px}
+.t5{background:var(--s5bg);color:var(--s5)} .t4{background:var(--s4bg);color:var(--s4)} .t3{background:var(--s3bg);color:var(--s3)} .t2{background:var(--s2bg);color:var(--s2)}
+.what{margin:0;font-size:15px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-top:1px solid var(--line);padding-top:10px;margin-top:auto}
+.facts div{display:grid;gap:1px;min-width:0}
+.facts small{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.facts strong{font-size:15px;font-variant-numeric:tabular-nums}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.go{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700;font-size:15px;background:var(--sea);color:var(--sea-ink);border-radius:10px;padding:9px 14px}
+.kid{font-size:13px;font-weight:700;color:var(--muted);align-self:center}
+.empty{padding:30px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:16px}
+
+section h2{font-size:clamp(24px,3.6vw,32px);font-weight:800;margin-bottom:6px}
+section .sub{color:var(--muted);margin:0 0 14px;max-width:65ch}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.box h3{font-size:19px;margin-bottom:8px}
+.box ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.list{display:grid;gap:0}
+.list .row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.list .row:first-child{border-top:0}
+.list .row .n{font-weight:700}
+.list .row .d{font-size:14px;color:var(--muted)}
+.list .row .stars{font-size:15px}
+.mini{font-size:14px;color:var(--muted)}
+.contact{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.copy{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer}
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:20px 30px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:520px){.facts{grid-template-columns:1fr 1fr 1fr}.card h3{font-size:18px}}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s ease}.card:hover{transform:translateY(-2px)}}
+</style>
+
+<style>
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}[hidden]{display:none!important}
+.sharebar{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.share{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;background:var(--star);color:#1b1400}
+.share.alt{background:rgba(255,255,255,.12);color:var(--sea-ink);border:1px solid rgba(255,255,255,.25)}
+.toast{font-size:14px;align-self:center;opacity:.9}
+@media print{.bar,.sharebar,.go{display:none!important}.card{break-inside:avoid}}
+</style>
+</head>
+<body><header class="top">
+  <div class="wrap hero"><div class="hero-text">
+    <h1>Disfruta de la vida sin gluten</h1>
+    <p class="lead">Aquí están los sitios donde podemos comer tranquilos, con estrellas según lo seguros que son.</p>
+    <div class="legend" aria-label="Qué significan las estrellas">
+      <span><b>★★★★★</b> Todo es sin gluten</span>
+      <span><b>★★★★</b> Certificado por la asociación</span>
+      <span><b>★★★</b> Cocinan aparte</span>
+      <span><b>★★</b> Tienen platos; preguntar</span>
+    </div>
+    <div class="sharebar">
+      <button class="share" id="btn-share" type="button">Compartir esta guía</button>
+      <a class="share alt" id="btn-wa" href="https://wa.me/?text=Disfruta%20de%20la%20vida%20sin%20gluten%3A%20https%3A%2F%2Foscarcarcedo.github.io%2Fdisfruta-sin-gluten%2F" target="_blank" rel="noopener" style="text-decoration:none">Enviar por WhatsApp</a>
+      <span class="toast" id="toast" aria-live="polite"></span>
+    </div>
+  </div>
+    <svg class="badge" viewBox="0 0 200 200" role="img" aria-label="Símbolo sin gluten: espiga de trigo tachada">
+      <defs><path id="sg-ring" d="M100,100 m-79,0 a79,79 0 1,1 158,0 a79,79 0 1,1 -158,0"/></defs>
+      <circle cx="100" cy="100" r="97" fill="var(--sea)" stroke="rgba(255,255,255,.28)" stroke-width="2"/>
+      <text font-family="Bricolage Grotesque, Segoe UI, sans-serif" font-size="15.5" font-weight="800" fill="var(--sea-ink)" letter-spacing="2"><textPath href="#sg-ring" textLength="490" lengthAdjust="spacing">GLUTEN FREE · SIN GLUTEN · GLUTEN FREE · SIN GLUTEN ·</textPath></text>
+      <circle cx="100" cy="100" r="64" fill="rgba(255,255,255,.07)" stroke="var(--star)" stroke-width="6"/>
+      <g fill="var(--star)">
+        <path d="M100 152 L100 58" stroke="var(--star)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        <ellipse cx="100" cy="53" rx="6.5" ry="12"/>
+        <ellipse cx="89" cy="74" rx="6.5" ry="12.5" transform="rotate(-32 89 74)"/>
+        <ellipse cx="111" cy="74" rx="6.5" ry="12.5" transform="rotate(32 111 74)"/>
+        <ellipse cx="89" cy="94" rx="6.5" ry="12.5" transform="rotate(-32 89 94)"/>
+        <ellipse cx="111" cy="94" rx="6.5" ry="12.5" transform="rotate(32 111 94)"/>
+        <ellipse cx="89" cy="114" rx="6.5" ry="12.5" transform="rotate(-32 89 114)"/>
+        <ellipse cx="111" cy="114" rx="6.5" ry="12.5" transform="rotate(32 111 114)"/>
+      </g>
+      <line class="slash" x1="146" y1="54" x2="54" y2="146" stroke="var(--sea)" stroke-width="18" stroke-linecap="round"/>
+      <line class="slash" x1="146" y1="54" x2="54" y2="146" stroke="var(--star)" stroke-width="8" stroke-linecap="round"/>
+    </svg>  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="search"><input id="q" type="search" placeholder="Busca un sitio, barrio o comida (pizza, churros…)" aria-label="Buscar"></div>
+    <div class="rows">
+      <div class="group" id="g-zona"><span class="lab">Zona</span></div>
+      <div class="group" id="g-cat"><span class="lab">Para</span></div>
+      <div class="group" id="g-min"><span class="lab">Confianza</span></div>
+      <div class="group"><button class="chip" id="kids" aria-pressed="false">Bueno con niños</button></div>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>No hay sitios con estos filtros. Prueba a quitar alguno.</div>
+    </div>
+
+    <section aria-labelledby="h-celi">
+      <h2 id="h-celi">La celiaquía en un minuto</h2>
+      <p class="sub">Para familia, amigos y restaurantes que nos invitan.</p>
+      <div class="two">
+        <div class="box">
+          <h3>Qué es</h3>
+          <ul>
+            <li><b>El gluten nos daña el intestino</b>, aunque no se note nada por fuera.</li>
+            <li><b>No es una moda ni una alergia.</b> Es para toda la vida y no se cura con pastillas: la única solución es no comer nada de gluten.</li>
+            <li><b>Basta muy poco:</b> una miga de pan en el plato o una cucharada de salsa hecha con harina ya nos hacen daño.</li>
+          </ul>
+          <div class="foods">
+            <div class="food no"><span class="fl">Lleva gluten</span><p>Pan, pasta, pizza, galletas, bollos, magdalenas, rebozados, empanadas, cerveza.</p></div>
+            <div class="food ojo"><span class="fl">Gluten escondido</span><p>Croquetas, bechamel, salsas y guisos espesados con harina, pan rallado de las albóndigas, embutidos, cubitos de caldo, sopas de sobre, salsa de soja, golosinas.</p></div>
+            <div class="food si"><span class="fl">Sin gluten de forma natural</span><p>Carne, pescado, huevos, fruta, verdura, patata, arroz, legumbres, leche, queso y aceite. Siempre que no se mezclen con nada con gluten.</p></div>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Cómo ayudarnos</h3>
+          <ul>
+            <li><b>Freír aparte.</b> Las patatas fritas no son aptas si se fríen en el mismo aceite que las croquetas o los calamares rebozados.</li>
+            <li><b>Utensilios limpios.</b> No uséis la tabla donde se ha cortado el pan, la tostadora, ni el colador o la olla de la pasta normal.</li>
+            <li><b>Quitar no sirve.</b> Apartar los picatostes de la ensalada o el pan de una tostada no deja el plato sin gluten.</li>
+            <li><b>Cuidado con lo que se comparte.</b> Si alguien unta pan en la mantequilla, la mermelada o el paté, ese tarro ya no nos vale. Mejor un tarro aparte.</li>
+            <li><b>En la barbacoa o la plancha,</b> haced lo nuestro primero o sobre papel de aluminio, sin pan tostándose al lado.</li>
+            <li><b>En un picoteo,</b> servidnos antes de que la gente meta la mano con pan.</li>
+            <li><b>Mirad la etiqueta.</b> Solo vale si pone "sin gluten" y lleva la espiga tachada. Lo demás <b>NO</b> vale.</li>
+            <li><b>Preguntad sin miedo.</b> Preferimos un "¿esto lleva harina?" a un mal rato.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-cad">
+      <h2 id="h-cad">De viaje: cadenas y supermercados</h2>
+      <p class="sub">Para comer algo rápido en cualquier ciudad de España.</p>
+      <div class="two">
+        <div class="box">
+          <h3>Cadenas</h3>
+          <div class="list" id="chains"></div>
+          <p class="mini">Mejor evitar: Burger King, Five Guys, TGB y Starbucks.</p>
+        </div>
+        <div class="box">
+          <h3>Supermercados</h3>
+          <div class="list" id="supers"></div>
+          <p class="mini">Comer sin gluten cuesta unos 1.000 € más al año por persona (FACE, 2026).</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-news">
+      <h2 id="h-news">Novedades de Instagram</h2>
+      <p class="sub">Lo más destacado de las cuentas sin gluten que seguimos, resumido. Pulsa "Ver publicación" para verlo en Instagram. Se actualiza cada mes.</p>
+      <div class="news" id="news"></div>
+      <button class="chip news-more" id="news-more" type="button" hidden>Ver más novedades</button>
+    </section>
+    <section aria-labelledby="h-redes">
+      <h2 id="h-redes">Para seguir en Instagram y TikTok</h2>
+      <p class="sub">Las cuentas sin gluten con más seguidores y las de nuestra zona. Ayudan a descubrir sitios nuevos; antes de ir, mirad las estrellas de esta guía.</p>
+      <div class="box" id="social"></div>
+    </section>
+
+    <section aria-labelledby="h-aso">
+      <h2 id="h-aso">Asociación y apps</h2>
+      <div class="two">
+        <div class="box">
+          <h3>Asociación de Celíacos de Euskadi (EZE)</h3>
+          <div class="contact">
+            <span>Teléfono: <b id="tel">944 169 480</b></span>
+            <button class="copy" data-copy="944 169 480">Copiar</button>
+          </div>
+          <div class="contact" style="margin-top:6px">
+            <span>Correo: <b>eze@celiacoseuskadi.org</b></span>
+            <button class="copy" data-copy="eze@celiacoseuskadi.org">Copiar</button>
+          </div>
+          <p class="mini">En Donostia: Plaza Giuseppe Verdi 5. Los socios tienen la app CELIGUIA, 20% de descuento en Eroski y 5% en BM. <a href="https://www.celiacoseuskadi.org" target="_blank" rel="noopener">celiacoseuskadi.org</a></p>
+          <h3 style="margin-top:14px">Asociación de Celíacos de Burgos</h3>
+          <p class="mini">Centro Sociosanitario Graciliano Urbaneja, Paseo Comendadores s/n, Burgos. Atención con cita previa: lunes de 17:15 a 19:15 y jueves de 10:00 a 12:00. <a href="https://www.celiacosburgos.org" target="_blank" rel="noopener">celiacosburgos.org</a> · <a href="https://www.instagram.com/celiacosburgos/" target="_blank" rel="noopener">@celiacosburgos</a></p>        </div>
+        <div class="box">
+          <h3>Apps para encontrar sitios</h3>
+          <div class="list">
+            <div class="row"><span class="n">CELIGUIA</span><span class="d">La más fiable, revisada por FACE</span><a href="https://celiacos.org/que-hacemos/app-facemovil/" target="_blank" rel="noopener">Ver</a></div>
+            <div class="row"><span class="n">Celicidad</span><span class="d">Restaurantes con opiniones de celíacos. Gratis</span><a href="https://restaurantes.celicidad.net" target="_blank" rel="noopener">Ver</a></div>
+            <div class="row"><span class="n">Find Me Gluten Free</span><span class="d">España y extranjero. Gratis</span><a href="https://www.findmeglutenfree.com" target="_blank" rel="noopener">Ver</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Nota</b> = media de Google sobre 5. <b>Nota celíacos</b> = Find Me Gluten Free sobre 5. Entre paréntesis, número de opiniones. Precios por persona, aproximados.</span>
+    <span>Datos de noviembre de 2026: Find Me Gluten Free, Restaurant Guru, Celicidad, Celiaquita, CeliNews, Atly, EZE, FACE y webs de los locales. Los sitios cambian: llamad antes de ir.</span>
+  </div>
+</footer>
+
+<script>
+// z: gipuzkoa | euskadi | espana ; c: desayuno | pintxos | comer | tienda
+const P = [
+ // Donostia — desayunar y merendar
+ {n:"Dulces Free",z:"gipuzkoa",city:"Donostia",a:"Gros",c:"desayuno",s:5,q:"Donuts, cookies y tartas por encargo",p:"3–10 €",g:"",f:"4,5 (23)",m:"Dulces Free Doctor Claudio Delgado 1 Donostia",k:1},
+ {n:"PURA Donosti",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"desayuno",s:5,q:"Pan, bollería, empanadillas y focaccia",p:"1–10 €",g:"",f:"",m:"Pura Donosti Inigo 12 Donostia"},
+ {n:"Carlos Arribas",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"desayuno",s:3,q:"Helado con cucurucho sin gluten",p:"3–6 €",g:"4,6 (648)",f:"5,0 (36)",m:"Carlos Arribas Portu 22 Donostia",k:1},
+ {n:"Vincent's Café (antes Maiatza)",z:"gipuzkoa",city:"Donostia",a:"Centro",c:"desayuno",s:2,q:"Tostadas con pan sin gluten y tarta de queso",p:"8–15 €",g:"4,5 (1.712)",f:"5,0 (45)",m:"Vincents Cafe San Bizente 7 Donostia"},
+ {n:"Lasai, Maitia",z:"gipuzkoa",city:"Donostia",a:"Egia",c:"desayuno",s:2,q:"Desayuno, tartas y galletas",p:"6–12 €",g:"4,7 (535)",f:"5,0 (2)",m:"Lasai Maitia Frantzia Pasealekua 1 Donostia"},
+ {n:"Bassk Cheesecakers",z:"gipuzkoa",city:"Donostia",a:"Centro",c:"desayuno",s:2,q:"Tartas de queso",p:"5–8 €",g:"",f:"4,5 (18)",m:"Bassk Cheesecakers Donostia"},
+ {n:"Tahona Okindegia",z:"gipuzkoa",city:"Donostia",a:"Gros",c:"desayuno",s:2,q:"Cookies y croissants envasados",p:"3–8 €",g:"4,6 (21)",f:"3,5 (4)",m:"Tahona Okindegia San Francisco 52 Donostia"},
+ // Donostia — pintxos
+ {n:"Mesón Portaletas",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"pintxos",s:4,q:"Pintxos, brochetas y txuletón",p:"15–30 €",g:"4,1 (4.401)",f:"4,5 (16)",m:"Meson Portaletas Portu 21 Donostia"},
+ {n:"Gandarias",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"pintxos",s:3,q:"Croquetas, brochetas y solomillo",p:"20–40 €",g:"4,3 (10.907)",f:"4,5 (56)",m:"Gandarias 31 de Agosto 23 Donostia"},
+ {n:"Mendaur Berria",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"pintxos",s:3,q:"Bravas, risotto y carrillera",p:"20–40 €",g:"4,6 (3.199)",f:"5,0 (23)",m:"Mendaur Berria Fermin Calbeton 8 Donostia"},
+ {n:"Miss Patatas",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"pintxos",s:3,q:"Patatas, nuggets y salchicha con pan sin gluten",p:"6–12 €",g:"4,6 (264)",f:"4,5 (13)",m:"Miss Patatas Esterlines 4 Donostia",k:1},
+ {n:"Bar Azkena",z:"gipuzkoa",city:"Donostia",a:"Mercado La Bretxa",c:"pintxos",s:2,q:"Pintxos (90% sin gluten)",p:"10–20 €",g:"",f:"",m:"Bar Azkena Mercado La Bretxa Donostia"},
+ {n:"Juantxo Taberna",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"pintxos",s:2,q:"Bocadillo de tortilla con pan sin gluten",p:"5–10 €",g:"",f:"",m:"Juantxo Taberna Enbeltran 6 Donostia"},
+ // Donostia — comer y cenar
+ {n:"Raviolina",z:"gipuzkoa",city:"Donostia",a:"Parte Vieja",c:"comer",s:4,q:"Pasta fresca, pizza y tiramisú. Certificado FACE",p:"15–25 €",g:"4,4 (2.823)",f:"4,5 (67)",m:"Raviolina Portu 9 Donostia",k:1},
+ {n:"La Rebotika",z:"gipuzkoa",city:"Donostia",a:"Antiguo",c:"comer",s:4,q:"Brasa, hamburguesa y tortilla. Asesorado por EZE",p:"10–20 €",g:"4,2 (1.409)",f:"4,5 (19)",m:"La Rebotika Zarautz 6 Donostia",k:1},
+ {n:"Isla Sicilia",z:"gipuzkoa",city:"Donostia",a:"Centro",c:"comer",s:4,q:"Pizza y pinsa. Dos cocinas independientes, avalado por EZE",p:"20–30 €",g:"",f:"4,5 (18)",m:"Isla Sicilia Easo 27 Donostia",k:1},
+ {n:"Igeldo",z:"gipuzkoa",city:"Donostia",a:"Puerto",c:"comer",s:3,q:"Calamares, croquetas, pescado y marisco",p:"11–40 €",g:"4,1 (1.611)",f:"5,0 (61)",m:"Igeldo Jatetxea Kaiko Pasealekua 15 Donostia"},
+ {n:"Cortázar",z:"gipuzkoa",city:"Donostia",a:"Centro",c:"comer",s:3,q:"Txuleta, arroz y rodaballo. Reservar",p:"20–30 €",g:"4,3 (1.549)",f:"4,5 (23)",m:"Cortazar Hondarribia 20 Donostia"},
+ {n:"Basoa Taberna",z:"gipuzkoa",city:"Donostia",a:"Ibaeta",c:"comer",s:3,q:"Cocina mediterránea, 99% sin gluten",p:"20–30 €",g:"4,7 (426)",f:"",m:"Basoa Taberna Bordatxipi 20 Donostia"},
+ // Tiendas
+ {n:"Amets Bakery",z:"gipuzkoa",city:"Irun",a:"Luis Mariano 3",c:"tienda",s:5,q:"Pan, bollería y pasteles. Baguette 2,60 €. Envío a casa y recogida en Donostia",p:"2–12 €",g:"",f:"5,0 (19)",m:"Amets Bakery Luis Mariano 3 Irun",web:"https://ametsbakery.com/tienda/pan-sin-gluten/"},
+ {n:"Dulces Free (tienda)",z:"gipuzkoa",city:"Donostia",a:"Gros",c:"tienda",s:5,q:"Cookies 2,55–3,40 €, donuts 3,40 €, pan y turrones. Tienda online",p:"3–10 €",g:"",f:"4,5 (23)",m:"Dulces Free Doctor Claudio Delgado 1 Donostia",web:"https://dulcesfree.es/shop"},
+ {n:"Eroski",z:"gipuzkoa",city:"Toda Gipuzkoa",a:"",c:"tienda",s:4,q:"656 productos sin gluten propios. Pan de molde 1,88 €. 20% de descuento con EZE",p:"—",g:"",f:"",m:"Eroski Donostia"},
+ {n:"BM Supermercados",z:"gipuzkoa",city:"Toda Euskadi",a:"",c:"tienda",s:4,q:"Sección sin gluten. 5% en toda la compra con EZE",p:"—",g:"",f:"",m:"BM Supermercados Donostia"},
+ {n:"Organic 49",z:"gipuzkoa",city:"Donostia",a:"Urbieta 49",c:"tienda",s:3,q:"Tienda ecológica. Recoge pedidos de Amets. También en Tolosa",p:"—",g:"",f:"5,0 (2)",m:"Organic 49 Urbieta 49 Donostia"},
+ // Resto de Gipuzkoa
+ {n:"Karlos Arguiñano",z:"gipuzkoa",city:"Zarautz",a:"",c:"comer",s:3,q:"Cocina vasca, casi toda la carta apta. Para celebraciones",p:"50–80 €",g:"4,3 (16.827)",f:"",m:"Restaurante Karlos Arguinano Zarautz"},
+ {n:"Telesforo",z:"gipuzkoa",city:"Zarautz",a:"",c:"comer",s:3,q:"Cocina tradicional. Pedir pan sin gluten un día antes",p:"25–40 €",g:"4,4 (2.775)",f:"4,0 (3)",m:"Telesforo Donibane Plaza 6 Zarautz",k:1},
+ {n:"Carlos Arribas Zarautz",z:"gipuzkoa",city:"Zarautz",a:"",c:"desayuno",s:3,q:"Helado con cucurucho sin gluten",p:"3–6 €",g:"",f:"5,0 (5)",m:"Carlos Arribas Higer Zarautz",k:1},
+ {n:"Sidrería Petritegi",z:"gipuzkoa",city:"Astigarraga",a:"",c:"comer",s:3,q:"Tortilla de bacalao, txuleta y queso. Pedir pan sin gluten",p:"40–50 €",g:"4,4 (3.872)",f:"5,0 (3)",m:"Sidreria Petritegi Astigarraga"},
+ {n:"Gaxen",z:"gipuzkoa",city:"Hondarribia",a:"",c:"desayuno",s:2,q:"Desayuno con pan sin gluten",p:"6–12 €",g:"4,6 (770)",f:"4,5 (3)",m:"Gaxen Zuloaga 8 Hondarribia"},
+ {n:"Bar Itxaropena",z:"gipuzkoa",city:"Hondarribia",a:"",c:"pintxos",s:2,q:"Pintxos sin gluten",p:"10–20 €",g:"",f:"3,5 (3)",m:"Bar Itxaropena San Pedro 67 Hondarribia"},
+ {n:"Iñigo Lavado",z:"gipuzkoa",city:"Irun",a:"",c:"comer",s:2,q:"Cocina de autor; pan y postres sin gluten",p:"30–50 €",g:"",f:"",m:"Restaurante Inigo Lavado Irun"},
+ // Resto de Euskadi (Bizkaia y Araba)
+ {n:"BAUSK",z:"euskadi",city:"Bilbao",a:"",c:"comer",s:5,q:"Platos caseros y terraza",p:"12–20 €",g:"",f:"",m:"BAUSK Garcia Rivero 8 Bilbao"},
+ {n:"Fit & Goxo",z:"euskadi",city:"Bilbao",a:"Santutxu",c:"tienda",s:3,q:"Dulces sin gluten y sin azúcar",p:"3–8 €",g:"",f:"",m:"Fit and Goxo Santutxu 30 Bilbao"},
+ {n:"Mi Postre Gourmet",z:"euskadi",city:"Vitoria",a:"Mercado San Pedro",c:"desayuno",s:5,q:"Repostería",p:"5–10 €",g:"",f:"",m:"Mi Postre Gourmet Mercado San Pedro Vitoria"},
+ {n:"Bar El Globo",z:"euskadi",city:"Bilbao",a:"",c:"pintxos",s:2,q:"Pintxos sin gluten (recomendado en TikTok)",p:"10–20 €",g:"",f:"",m:"Bar El Globo Diputacion 8 Bilbao"},
+ {n:"Restaurante Víctor",z:"euskadi",city:"Bilbao",a:"Plaza Nueva",c:"comer",s:2,q:"Cena con opciones sin gluten (recomendado en TikTok)",p:"25–40 €",g:"",f:"",m:"Restaurante Victor Plaza Nueva Bilbao"},
+ {n:"Bar Campus",z:"gipuzkoa",city:"Donostia",a:"Amara",c:"pintxos",s:2,q:"Bocadillos sin gluten. En día de partido, por encargo (visto en @donosstia_singluten)",p:"5–10 €",g:"",f:"",m:"Bar Campus Amara Donostia"},
+ {n:"Veritas",z:"gipuzkoa",city:"Donostia",a:"Centro, Gros y Antiguo",c:"tienda",s:3,q:"Supermercado ecológico con productos sin gluten, como pan de trigo sarraceno",p:"—",g:"",f:"",m:"Veritas supermercado Donostia"},
+ {n:"Restaurante Martín",z:"euskadi",city:"Barakaldo",a:"",c:"comer",s:2,q:"Cocina tradicional; adaptan el menú. Solo 5 mesas: reservar (visto en @bilbaosingluten)",p:"22–44 €",g:"",f:"",m:"Restaurante Martin Arrandi 20 Barakaldo"},
+ {n:"Bar Peralvillo",z:"espana",city:"Santoña",a:"",c:"pintxos",s:3,q:"Rabas, croquetas y patatas sin gluten hechas aparte (visto en @donosstia_singluten)",p:"5–10 €",g:"",f:"",m:"Bar Peralvillo Mayor Andujar 1 Santona"},
+ {n:"Asador Los Nietos",z:"espana",city:"Briones (La Rioja)",a:"",c:"comer",s:3,q:"Cocina tradicional, casi toda la carta apta. Muy seguro (visto en @bilbaosingluten)",p:"35–50 €",g:"",f:"",m:"Asador Los Nietos Mesones 30 Briones"},
+ // Burgos y provincia
+ {n:"Bar Peña San Vicente (Barbieca)",z:"burgos",city:"Burgos",a:"Villayuda",c:"comer",s:5,q:"Carta 100% sin gluten; camareros celíacos. Abre todos los días",p:"20–30 €",g:"",f:"",cel:"9/10 (8)",m:"Bar Pena San Vicente Plaza Vista Alegre 2 Burgos",k:1},
+ {n:"En Tiempos de Maricastaña",z:"burgos",city:"Burgos",a:"Espolón",c:"comer",s:4,q:"Gastrobar junto a la Catedral. Forma parte de la Asociación de Celíacos",p:"20–30 €",g:"",f:"",cel:"8,9/10 (37)",m:"En Tiempos de Maricastana Paseo del Espolon 10 Burgos"},
+ {n:"Carmen Restaurante",z:"burgos",city:"Burgos",a:"",c:"comer",s:4,q:"Casi toda la carta adaptada, también hamburguesas; pan sin gluten. En la guía de Celíacos Burgos",p:"20–30 €",g:"",f:"",cel:"9,3/10 (3)",m:"Carmen Restaurante Jose Maria Codon 9 Burgos"},
+ {n:"Bodegas San Blas",z:"burgos",city:"Lerma",a:"",c:"comer",s:3,q:"Muchos platos marcados sin gluten, pan sin gluten y fritura en aceite limpio",p:"20–35 €",g:"",f:"",m:"Bodegas San Blas Lerma"},
+ {n:"Villa Trajano",z:"burgos",city:"Burgos",a:"",c:"comer",s:2,q:"Italiano: pasta, pizza y risotto sin gluten",p:"10–20 €",g:"",f:"",cel:"9,4/10 (6)",m:"Villa Trajano Reyes Catolicos 8 Burgos",k:1},
+ {n:"Hammmbur",z:"burgos",city:"Burgos",a:"",c:"comer",s:2,q:"Hamburguesas aptas para celíacos",p:"12–20 €",g:"",f:"",cel:"8,1/10 (10)",m:"Hammmbur San Lorenzo 29 Burgos",k:1},
+ {n:"Casa Álvaro",z:"burgos",city:"Burgos",a:"",c:"comer",s:2,q:"Años ofreciendo menús sin gluten",p:"20–35 €",g:"",f:"",cel:"8,5/10 (3)",m:"Restaurante Casa Alvaro Trujillo 3 Burgos"},
+ {n:"Heladería La Fresquera",z:"burgos",city:"Burgos",a:"",c:"desayuno",s:2,q:"Helados y cucuruchos sin gluten",p:"3–8 €",g:"",f:"",m:"Heladeria La Fresquera Lain Calvo 7 Burgos",k:1},
+ {n:"Casa Florencio",z:"burgos",city:"Aranda de Duero",a:"",c:"comer",s:2,q:"Asador: lechazo; casi toda la carta sin gluten",p:"30–45 €",g:"",f:"",m:"Casa Florencio Isilla 14 Aranda de Duero"},
+ {n:"Los Claveles",z:"burgos",city:"Ibeas de Juarros",a:"",c:"comer",s:2,q:"Comida casera; la cocinera es celíaca",p:"15–25 €",g:"",f:"",m:"Los Claveles Ibeas de Juarros"},
+ {n:"Sumendi Pastelería",z:"espana",city:"Frómista (Palencia)",a:"",c:"tienda",s:5,q:"Panadería sin gluten; napolitanas (visto en @burgossingluten)",p:"3–8 €",g:"",f:"",m:"Sumendi pasteleria Fromista"},
+ {n:"La Cañía",z:"espana",city:"Santander",a:"El Sardinero",c:"comer",s:3,q:"Carta sin gluten; el mejor arroz según @burgossingluten",p:"20–35 €",g:"",f:"",m:"Restaurante La Cania Santander"},
+ // España
+ {n:"El Fartuquín",z:"espana",city:"Oviedo",a:"",c:"comer",s:5,q:"Fabada, cachopo y frixuelos. Nº1 de España 2026",p:"20–30 €",g:"",f:"",cel:"9,6/10 (154)",m:"El Fartuquin Carpio 19 Oviedo",k:1},
+ {n:"Miracle",z:"espana",city:"Valencia",a:"",c:"comer",s:5,q:"Mediterránea con toque sirio. Nº2 de España",p:"20–35 €",g:"",f:"",cel:"9,8/10 (153)",m:"El Miracle Campoamor 42 Valencia"},
+ {n:"As de Bastos",z:"espana",city:"Madrid",a:"Tetuán",c:"comer",s:5,q:"Bravas, pulpo y menú del día. Nº4 de España",p:"~20 €",g:"",f:"",cel:"9,4/10 (103)",m:"As de Bastos Castilla 62 Madrid"},
+ {n:"El Pescaíto de Carmela",z:"espana",city:"Granada",a:"",c:"comer",s:5,q:"Pescado frito y marisco. Nº5 de España",p:"20–30 €",g:"",f:"",cel:"9,6/10 (57)",m:"El Pescaito de Carmela Granada"},
+ {n:"Somni",z:"espana",city:"Valencia",a:"",c:"comer",s:5,q:"Gourmet para celebraciones. Nº7 de España",p:"~85 €",g:"",f:"",cel:"10/10 (9)",m:"Somni restaurante Valencia"},
+ {n:"Palace",z:"espana",city:"Gijón",a:"",c:"comer",s:5,q:"Cocina asturiana. Nº8 de España",p:"20–35 €",g:"",f:"",m:"Palace Plaza del Marques 3 Gijon"},
+ {n:"Señora Pan",z:"espana",city:"Sevilla",a:"",c:"comer",s:5,q:"Venezolano con pan propio. Nº10 de España",p:"15–25 €",g:"",f:"",cel:"9,8/10 (14)",m:"Senora Pan Zaragoza 64 Sevilla"},
+ {n:"Naked & Sated",z:"euskadi",city:"Bilbao",a:"",c:"desayuno",s:5,q:"Brunch y bowls",p:"15–25 €",g:"",f:"",gr:"7,0/10 (917)",m:"Naked and Sated Uribitarte 4 Bilbao"},
+ {n:"Senza Glutine Grosso Napoletano",z:"euskadi",city:"Bilbao",a:"",c:"comer",s:5,q:"Pizza napolitana; la mejor masa según @bilbaosingluten",p:"25–35 €",g:"",f:"",m:"Senza Glutine Grosso Napoletano Iparraguirre 15 Bilbao",k:1},
+ {n:"La Currita",z:"euskadi",city:"Bilbao",a:"",c:"desayuno",s:5,q:"Desayuno y tartas",p:"5–10 €",g:"",f:"",m:"La Currita Mercado del Ensanche Bilbao"},
+ {n:"Kuki Cookie Bakery",z:"euskadi",city:"Bilbao",a:"",c:"tienda",s:5,q:"Galletas rellenas",p:"2–4 €",g:"",f:"",m:"Kuki Cookie Bakery Colon de Larreategui 34 Bilbao"},
+ {n:"WAYOYO",z:"euskadi",city:"Vitoria",a:"",c:"comer",s:5,q:"Tacos y arepas",p:"12–20 €",g:"",f:"",m:"Wayoyo Pintore 34 Vitoria"},
+ {n:"Olari",z:"espana",city:"Pamplona",a:"",c:"tienda",s:5,q:"Pan y bollería",p:"3–6 €",g:"",f:"",m:"Olari Miguel Astrain 18 Pamplona"},
+ {n:"LaLina",z:"espana",city:"Madrid",a:"La Latina",c:"pintxos",s:5,q:"Bravas, croquetas y cachopo",p:"15–25 €",g:"",f:"",gr:"8,2/10 (4.246)",m:"LaLina Plaza Cebada Madrid"},
+ {n:"Pizza Natura",z:"espana",city:"Madrid",a:"",c:"comer",s:5,q:"Pizza de mijo y quinoa",p:"20–30 €",g:"",f:"",m:"Pizza Natura Jovellanos 6 Madrid",k:1},
+ {n:"La Celiacoteca",z:"espana",city:"Madrid",a:"",c:"tienda",s:5,q:"Pastelería y tienda",p:"3–8 €",g:"",f:"",m:"La Celiacoteca Eraso 3 Madrid"},
+ {n:"Messié Pizza",z:"espana",city:"Barcelona",a:"Gràcia",c:"comer",s:5,q:"Pizza",p:"15–25 €",g:"",f:"",gr:"8,4/10 (3.842)",m:"Messie Pizza Sin Gluten Siracusa 15 Barcelona",k:1},
+ {n:"Gula Sana",z:"espana",city:"Barcelona",a:"",c:"desayuno",s:5,q:"Cafetería de desayuno a cena",p:"8–15 €",g:"",f:"",m:"Gula Sana Diputacio 361 Barcelona"},
+ {n:"Cal Marius 449",z:"espana",city:"Barcelona",a:"",c:"tienda",s:5,q:"Panadería y cafetería",p:"3–6 €",g:"",f:"",m:"Cal Marius 449 Mallorca 449 Barcelona"},
+ {n:"Berguna",z:"espana",city:"Valencia",a:"",c:"desayuno",s:5,q:"Desayuno y brunch",p:"10–18 €",g:"",f:"",m:"Berguna Gluten Free Moratin 13 Valencia"},
+ {n:"Llima",z:"espana",city:"Zaragoza",a:"",c:"comer",s:5,q:"Arroces",p:"25–35 €",g:"",f:"",m:"Llima Paz 1 Zaragoza"},
+ {n:"La Trasta",z:"espana",city:"León",a:"",c:"comer",s:5,q:"Comida y cena",p:"15–25 €",g:"",f:"",m:"La Trasta Leon"},
+ {n:"El Pastelero Real",z:"espana",city:"Málaga",a:"",c:"desayuno",s:5,q:"Churros con chocolate",p:"4–8 €",g:"",f:"",m:"El Pastelero Real Babel 5 Malaga",k:1},
+ {n:"Chiringuito El Cateto",z:"espana",city:"Fuengirola",a:"",c:"comer",s:5,q:"Pescaíto en la playa",p:"20–30 €",g:"",f:"",m:"Chiringuito El Cateto Fuengirola",k:1},
+ {n:"Il Capriccio",z:"espana",city:"Palma",a:"",c:"comer",s:5,q:"Pizza y pasta, con zona de juegos",p:"20–30 €",g:"",f:"",m:"Il Capriccio Costa y Llobera 24 Palma",k:1},
+ {n:"Gran Tarajal",z:"espana",city:"Tenerife",a:"La Orotava",c:"comer",s:5,q:"Comida canaria casera. Reservar",p:"15–25 €",g:"",f:"",gr:"6,9/10 (210)",m:"Gran Tarajal Sin Gluten La Orotava"},
+ {n:"Casa Leotta",z:"euskadi",city:"Bilbao",a:"Abando",c:"comer",s:4,q:"Pinsas. Asesorado por EZE",p:"20–30 €",g:"",f:"",m:"Casa Leotta Bilbao"},
+ {n:"Restaurante Jero",z:"espana",city:"Salamanca",a:"",c:"comer",s:4,q:"Carta sin gluten en cocina separada",p:"15–25 €",g:"",f:"",m:"Restaurante Jero Melendez 11 Salamanca"},
+ {n:"Petiscos",z:"espana",city:"Santiago",a:"",c:"comer",s:4,q:"Cocina gallega. Asesorado por ACEGA",p:"20–30 €",g:"",f:"",m:"Restaurante Petiscos Santiago de Compostela"},
+ {n:"Ahoan",z:"euskadi",city:"Bilbao",a:"Plaza Nueva",c:"pintxos",s:3,q:"Pintxos y bocadillos, cocina independiente",p:"15–25 €",g:"",f:"",m:"Ahoan Plaza Nueva Bilbao"},
+ {n:"La Taberna de Baco",z:"espana",city:"Logroño",a:"",c:"pintxos",s:3,q:"Tapas, casi toda la carta sin gluten",p:"15–25 €",g:"",f:"",m:"La Taberna de Baco San Agustin 10 Logrono"},
+ {n:"A Banda Arroz",z:"espana",city:"Santander",a:"",c:"comer",s:3,q:"Arroces",p:"20–35 €",g:"",f:"",m:"A Banda Arroz Santander"}
+];
+const CH=[
+ ["Goiko (solo Madrid y Barcelona)",5,"Locales enteros sin gluten · 15–20 €"],
+ ["McDonald's",4,"Pan envasado y freidora propia · 8–10 €"],
+ ["Foster's Hollywood",4,"Carta hecha con FACE · 15–25 €"],
+ ["Domino's",4,"Masa sin gluten · ~19 € la mediana"],
+ ["Rodilla",4,"Sándwiches sin gluten · 5–10 €"],
+ ["Telepizza, Ginos, La Tagliatella",2,"Algunas pizzas y pastas · preguntar"]];
+const SU=[
+ ["Eroski",4,"656 productos propios · 20% con EZE"],
+ ["BM",4,"5% en toda la compra con EZE"],
+ ["Mercadona",3,"Más de 1.300 productos (Hacendado)"],
+ ["Carrefour",3,"Marca No Gluten, más de 800 productos"],
+ ["Dia",3,"Gama DIA Sin Gluten"]];
+const SO=[
+ ["@donosstia_singluten","Miriam, celíaca: sitios seguros en Donostia. Nuestra favorita","8.764","https://www.instagram.com/donosstia_singluten/","Euskadi"],
+ ["@celiacoseuskadi","La asociación EZE: avisos, talleres y novedades","3.657","https://www.instagram.com/celiacoseuskadi/","Euskadi"],
+ ["@bilbaosingluten","Bilbao; dice si el sitio lo avala EZE","2.179","https://www.instagram.com/bilbaosingluten/","Euskadi"],
+ ["@burgossingluten","Productos, restaurantes y escapadas sin gluten desde Burgos","1.116","https://www.instagram.com/burgossingluten/","Burgos"],
+ ["@celiacosburgos","Asociación de Celíacos de Burgos: actividades y avisos","627","https://www.instagram.com/celiacosburgos/","Burgos"],
+ ["@paufeel","Paula Monreal: recetas fáciles, todas sin gluten","3 millones","https://www.instagram.com/paufeel/","España"],
+ ["@lu.singluten","Lucía: recetas sin gluten y viajes","389.000","https://www.instagram.com/lu.singluten/","España"],
+ ["@disfrutandosingluten","Helena: celiaquía, viajes y recetas","66.000","https://www.instagram.com/disfrutandosingluten/","España"],
+ ["@singlutenismo","Dietista celíaca: explica la celiaquía fácil","48.000","https://www.instagram.com/singlutenismo/","España"],
+ ["@borjapperezz","Restaurantes sin gluten, sobre todo Madrid","46.000","https://www.instagram.com/borjapperezz/","España"],
+ ["@larutasingluten","Sitios y productos sin gluten por España","39.000","https://www.instagram.com/larutasingluten/","España"],
+ ["@adriana.singluten","Restaurantes y productos del súper","15.000","https://www.instagram.com/adriana.singluten/","España"],
+ ["@glutenfreesister","Sin gluten por el mundo: viajes","15.000","https://www.instagram.com/glutenfreesister/","España"],
+ ["@singlumadrid","Mapa de Madrid sin gluten","14.000","https://www.instagram.com/singlumadrid/","España"],
+ ["@crispyglutenfree","Recetas sin gluten","8.600","https://www.instagram.com/crispyglutenfree/","España"],
+ ["@asturceliaca","Sin gluten en Asturias","6.100","https://www.instagram.com/asturceliaca/","España"],
+ ["@glutenfreedonostia","Comer sin gluten en Donostia (sin publicar desde 2025)","1.158","https://www.instagram.com/glutenfreedonostia/","Euskadi"],
+ ["@singlucetas","Pintxos sin gluten (sin publicar desde 2025)","3.680","https://www.instagram.com/singlucetas/","Euskadi"]];
+const TYPE={5:["Todo sin gluten","t5"],4:["Certificado","t4"],3:["Cocinan aparte","t3"],2:["Preguntar antes","t2"]};
+const ZONAS=[["gipuzkoa","Gipuzkoa"],["euskadi","Resto de Euskadi"],["burgos","Burgos y provincia"],["espana","Resto de España"],["all","Todo"]];
+const CATS=[["all","Todo"],["desayuno","Desayunar y merendar"],["pintxos","Pintxos"],["comer","Comer y cenar"],["tienda","Tiendas"]];
+const MINS=[[2,"Todas"],[3,"★★★ o más"],[4,"★★★★ o más"],[5,"Solo ★★★★★"]];
+const st={z:"gipuzkoa",c:"all",min:2,kids:false,q:""};
+try{const s=JSON.parse(localStorage.getItem("sg-filtros")||"null"); if(s) Object.assign(st,s,{q:""});}catch(e){}
+if(!ZONAS.some(([v])=>v===st.z)) st.z="gipuzkoa";
+
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const stars=n=>`<span class="stars" aria-label="${n} estrellas de confianza"><span class="on">${"★".repeat(n)}</span><span class="off">${"★".repeat(5-n)}</span></span>`;
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const maps=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+
+function chips(id,list,key){
+  const g=document.getElementById(id);
+  list.forEach(([v,l])=>{const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=l;b.dataset.v=v;
+    b.addEventListener("click",()=>{st[key]=key==="min"?+v:v;render();});g.appendChild(b);});
+}
+chips("g-zona",ZONAS,"z");chips("g-cat",CATS,"c");chips("g-min",MINS,"min");
+document.getElementById("kids").addEventListener("click",()=>{st.kids=!st.kids;render();});
+document.getElementById("q").addEventListener("input",e=>{st.q=e.target.value;render();});
+
+function fact(label,val){return val?`<div><small>${label}</small><strong>${esc(val)}</strong></div>`:`<div><small>${label}</small><strong>—</strong></div>`;}
+function render(){
+  for(const [id,key] of [["g-zona","z"],["g-cat","c"],["g-min","min"]])
+    document.querySelectorAll(`#${id} .chip`).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v==String(st[key]))));
+  document.getElementById("kids").setAttribute("aria-pressed",String(st.kids));
+  try{localStorage.setItem("sg-filtros",JSON.stringify({z:st.z,c:st.c,min:st.min,kids:st.kids}));}catch(e){}
+  const q=norm(st.q.trim());
+  const list=P.filter(p=>(st.z==="all"||p.z===st.z)&&(st.c==="all"||p.c===st.c)&&p.s>=st.min&&(!st.kids||p.k)
+    &&(!q||norm([p.n,p.city,p.a,p.q].join(" ")).includes(q)))
+    .sort((a,b)=>b.s-a.s);
+  const grid=document.getElementById("grid");
+  grid.innerHTML=list.map(p=>{
+    const [tl,tc]=TYPE[p.s];
+    const nota=p.g||p.gr||p.cel||"";
+    const notaLab=p.cel?"Celicidad":p.gr?"Nota /10":"Nota";
+    return `<article class="card">
+      <div class="head"><div><h3>${esc(p.n)}</h3><div class="where">${esc(p.city)}${p.a?" · "+esc(p.a):""}</div></div>${stars(p.s)}</div>
+      <div><span class="tag ${tc}">${tl}</span></div>
+      <p class="what">${esc(p.q)}</p>
+      <div class="facts">${fact("€/persona",p.p)}${fact(notaLab,nota)}${fact("Nota celíacos",p.f)}</div>
+      <div class="btns"><a class="go" href="${maps(p.m)}" target="_blank" rel="noopener">Cómo llegar</a>${p.web?`<a class="go" href="${p.web}" target="_blank" rel="noopener">Tienda online</a>`:""}${p.k?`<span class="kid">Bueno con niños</span>`:""}</div>
+    </article>`;}).join("");
+  document.getElementById("empty").hidden=list.length>0;
+  document.getElementById("count").textContent=list.length+(list.length===1?" sitio":" sitios");
+}
+function rows(id,arr){document.getElementById(id).innerHTML=arr.map(([n,s,d])=>`<div class="row">${stars(s)}<div><div class="n">${esc(n)}</div><div class="d">${esc(d)}</div></div><span></span></div>`).join("");}
+const NEWS=[
+ ["2026-11-08","@celiacoseuskadi","¿Por qué cuestan más los productos sin gluten?","La asociación explica los motivos: las harinas especiales son más caras, se venden mucho menos y las fábricas necesitan maquinaria propia para evitar la contaminación.","https://www.instagram.com/celiacoseuskadi/p/DfeZAxhjtUb/",""],
+ ["2026-11-06","@celiacoseuskadi","Talleres de roscón de Reyes sin gluten","Para preparar la Navidad: dos talleres en Vitoria para aprender a hacer roscón sin gluten, el 14 de noviembre y el 12 de diciembre.","https://www.instagram.com/celiacoseuskadi/p/DfZVPFWl2_0/",""],
+ ["2026-11-05","@bilbaosingluten","Asador Los Nietos (Briones, La Rioja)","Casi toda la carta es apta o se adapta, y lo describen como muy seguro. Menús de 35 a 50 €. No está avalado por EZE: preguntad siempre.","https://www.instagram.com/bilbaosingluten/p/DfXo1L1kYuk/",""],
+ ["2026-11-04","@celiacosburgos","Jornadas sobre enfermedades autoinmunes en Burgos","El martes 17 de noviembre a las 17:30, en el Centro Sociosanitario Graciliano Urbaneja: charla sobre enfermedades autoinmunes del aparato digestivo.","https://www.instagram.com/celiacosburgos/p/DfUpyVFsk9-/",""],
+ ["2026-11-03","@celiacoseuskadi","FACE pide la ley de ayudas para celíacos","La federación pide a los partidos que la ley de compensación económica sea una prioridad en la próxima legislatura.","https://www.instagram.com/celiacoseuskadi/p/DfSDWBZlcQb/",""],
+ ["2026-11-02","@donosstia_singluten","Miriam vuelve a publicar","Tras unos meses sin publicar, arranca su \"temporada 2\" con nuevos sitios de Donostia.","https://www.instagram.com/donosstia_singluten/reel/DfQD9dDNQpv/",""],
+ ["2026-10-29","@bilbaosingluten","Grosso Napoletano Bilbao, 100% sin gluten","Pizzería toda sin gluten en Iparraguirre 15. Para ellos, la mejor masa sin gluten. Unos 25–35 € por persona.","https://www.instagram.com/bilbaosingluten/reel/DfFpMaqRlHd/",""],
+ ["2026-10-08","@celiacosburgos","Taller de queso de oveja en Oquillas","La asociación de Burgos organizó un taller para hacer queso, con visita a la quesería y cata (25 de octubre).","https://www.instagram.com/celiacosburgos/p/DeNfO2jsau1/",""],
+ ["2026-09-08","@burgossingluten","Productos sin gluten en Francia","Para viajar: en los supermercados Intermarché hay bastantes productos sin gluten, muchos de Schär.","https://www.instagram.com/burgossingluten/p/DdCHyNRs7Me/",""],
+ ["2026-08-20","@bilbaosingluten","Restaurante Martín (Barakaldo)","Cocina tradicional; adaptan los platos del menú (22–44 €). Solo 5 mesas: reservad con tiempo. No avalado por EZE.","https://www.instagram.com/bilbaosingluten/reel/DcRQA4BoFrt/",""],
+ ["2026-07-06","@burgossingluten","Un día sin gluten en Santander","Desayuno en Amelia (sobaos, y envían a casa), arroz en La Cañía, helados y gofres en Bico de Xeado y croquetas en Soul.","https://www.instagram.com/burgossingluten/p/DadVlezjPqj/",""],
+ ["2026-06-01","@donosstia_singluten","Rabas sin gluten en Santoña","Bar Peralvillo hace rabas, croquetas y patatas sin gluten aparte, con raciones grandes y baratas. Le da 5 de 5.","https://www.instagram.com/donosstia_singluten/p/DZDapYhjYRc/",""],
+ ["2026-05-29","@donosstia_singluten","Isla Sicilia, de sus pizzerías favoritas","Tiene dos cocinas independientes y está avalada por la asociación EZE. Recomienda la pizza paraíso y la pinsa de gorgonzola.","https://www.instagram.com/donosstia_singluten/reel/DY7sTcJNQkA/",""],
+ ["2026-05-27","@donosstia_singluten","Día Nacional del Celíaco","Su mensaje: \"No pasa nada por un poquito\". Sí pasa. La celiaquía no es una moda ni una dieta.","https://www.instagram.com/donosstia_singluten/p/DY1ypsDjV1Z/",""],
+ ["2026-05-17","@donosstia_singluten","Bar Campus (Amara), un gesto bonito","En día de partido no hacían bocadillos sin gluten, pero le prepararon uno por encargo. Merece la pena llamar antes.","https://www.instagram.com/donosstia_singluten/p/DYb7xynjR6l/",""],
+ ["2026-05-03","@burgossingluten","Panadería sin gluten en Frómista","Sumendi, en Frómista (Palencia), es una panadería sin gluten. Recomiendan sus napolitanas.","https://www.instagram.com/burgossingluten/reel/DX42O5gMDO_/",""],
+ ["2026-05-15","@donosstia_singluten","Veritas en Donostia","Supermercado ecológico con productos sin gluten. Tiene 3 tiendas en Donostia: Centro, Gros y Antiguo.","https://www.instagram.com/donosstia_singluten/reel/DYXpLTrN4xk/","Colaboración pagada"]
+];
+NEWS.sort((a,b)=>b[0].localeCompare(a[0]));
+const MESES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+function renderNews(all){
+  const box=document.getElementById("news"), more=document.getElementById("news-more");
+  const list=all?NEWS:NEWS.slice(0,6);
+  box.innerHTML=list.map(([d,acc,t,x,u,tag])=>{const [y,m,dd]=d.split("-");
+    return `<article class="news-item"><div class="news-date">${+dd}<small>${MESES[+m-1]} ${y}</small></div>
+      <div class="news-acc"><a href="https://www.instagram.com/${acc.slice(1)}/" target="_blank" rel="noopener">${esc(acc)}</a>${tag?`<span class="news-tag">${esc(tag)}</span>`:""}</div>
+      <div class="news-t">${esc(t)}</div>
+      <p class="news-x">${esc(x)} <a href="${u}" target="_blank" rel="noopener">Ver publicación</a></p></article>`;}).join("");
+  more.hidden=all||NEWS.length<=6;
+}
+document.getElementById("news-more").addEventListener("click",()=>renderNews(true));
+renderNews(false);rows("chains",CH);rows("supers",SU);
+const SOG=[["Euskadi","Euskadi"],["Burgos","Burgos y provincia · destacadas"],["España","Las más seguidas de España"]];
+document.getElementById("social").innerHTML=SOG.map(([g,l])=>`<div class="sog${g==="Burgos"?" hot":""}"><h3>${esc(l)}</h3><div class="list">`+SO.filter(s=>s[4]===g).map(([h,d,f,u])=>`<div class="row"><a class="n" href="${u}" target="_blank" rel="noopener">${esc(h)}</a><span class="d">${esc(d)}</span><span class="d">${f} seguidores</span></div>`).join("")+`</div></div>`).join("");document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",()=>{
+  const t=b.dataset.copy;
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(()=>{const o=b.textContent;b.textContent="Copiado";setTimeout(()=>b.textContent=o,1500);}).catch(()=>{b.textContent=t;});
+}));
+render();
+</script>
+
+<script>
+(function(){
+  // Enlace público de la guía. Si la web está subida a internet, se usa su propia dirección.
+  const PUBLIC_URL = "https://oscarcarcedo.github.io/disfruta-sin-gluten/";
+  const url = location.protocol.startsWith("http") ? location.href.split("#")[0] : PUBLIC_URL;
+  const text = "Disfruta de la vida sin gluten: guía de sitios para comer sin gluten en Gipuzkoa, Euskadi, Burgos y España";
+  const toast = m => { const t=document.getElementById("toast"); t.textContent=m; setTimeout(()=>t.textContent="",4000); };
+  document.getElementById("btn-wa").href = "https://wa.me/?text=" + encodeURIComponent(text + " " + url);
+  document.getElementById("btn-share").addEventListener("click", async () => {
+    if (navigator.share) { try { await navigator.share({title:document.title, text, url}); return; } catch(e){ if (e && e.name === "AbortError") return; } }
+    if (navigator.clipboard) { navigator.clipboard.writeText(url).then(()=>toast("Enlace copiado: pégalo en WhatsApp"), ()=>toast(url)); }
+    else toast(url);
+  });
+})();
+</script>
+</body>
+</html>
