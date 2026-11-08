@@ -72,7 +72,8 @@ header.top .hero-text{display:grid;gap:14px;min-width:0}
 .topnav a{flex:none;color:var(--sea-ink);text-decoration:none;font-weight:700;font-size:14px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);white-space:nowrap}
 .topnav a:hover,.topnav a:focus-visible{background:var(--star);color:#1b1400}
 [id]{scroll-margin-top:64px}
-@media (max-width:640px){.rows{display:grid;gap:6px}.group{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;padding-bottom:2px}.group::-webkit-scrollbar{display:none}.group .chip{flex:none}.count{font-size:13px}}.news-tag.alerta{background:var(--s2bg);color:var(--s2)}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+@media (max-width:640px){.rows{display:grid;gap:6px}.group{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;padding-bottom:2px}.group::-webkit-scrollbar{display:none}.group .chip{flex:none}.count{font-size:13px}}.news-tag.alerta{background:var(--s2bg);color:var(--s2)}.navshare{margin-left:auto;flex:none;font:inherit;font-weight:700;font-size:14px;border:0;border-radius:999px;padding:7px 13px;background:var(--star);color:#1b1400;cursor:pointer;white-space:nowrap}
+.navshare:hover{filter:brightness(1.08)}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 h1{font-size:clamp(30px,6vw,52px);font-weight:800;line-height:1.02}
 .lead{max-width:62ch;font-size:17px;opacity:.95;margin:0}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
@@ -153,11 +154,6 @@ img{max-width:100%}[hidden]{display:none!important}
       <span><b>★★★</b> Cocinan aparte</span>
       <span><b>★★</b> Tienen platos; preguntar</span>
     </div>
-    <div class="sharebar">
-      <button class="share" id="btn-share" type="button">Compartir esta guía</button>
-      <a class="share alt" id="btn-wa" href="https://wa.me/?text=Disfruta%20de%20la%20vida%20sin%20gluten%3A%20https%3A%2F%2Foscarcarcedo.github.io%2Fdisfruta-sin-gluten%2F" target="_blank" rel="noopener" style="text-decoration:none">Enviar por WhatsApp</a>
-      <span class="toast" id="toast" aria-live="polite"></span>
-    </div>
   </div>
     <svg class="badge" viewBox="0 0 200 200" role="img" aria-label="Símbolo sin gluten: espiga de trigo tachada">
       <defs><path id="sg-ring" d="M100,100 m-79,0 a79,79 0 1,1 158,0 a79,79 0 1,1 -158,0"/></defs>
@@ -184,6 +180,7 @@ img{max-width:100%}[hidden]{display:none!important}
     <a href="#h-celi">La celiaquía en un minuto</a>
     <a href="#h-news">Noticias y novedades</a>
     <a href="#h-redes">Para seguir en redes</a>
+    <button class="navshare copy" type="button" data-copy="https://oscarcarcedo.github.io/disfruta-sin-gluten/" title="Copia el enlace para pegarlo en WhatsApp, Instagram o un correo">Compartir esta guía</button>
   </div>
 </nav>
 <div class="bar" id="buscar">
@@ -517,25 +514,10 @@ renderNews(false);rows("chains",CH);rows("supers",SU);
 const SOG=[["Euskadi","Euskadi"],["Burgos","Burgos y provincia · destacadas"],["España","Las más seguidas de España"]];
 document.getElementById("social").innerHTML=SOG.map(([g,l])=>`<div class="sog${g==="Burgos"?" hot":""}"><h3>${esc(l)}</h3><div class="list">`+SO.filter(s=>s[4]===g).map(([h,d,f,u])=>`<div class="row"><a class="n" href="${u}" target="_blank" rel="noopener">${esc(h)}</a><span class="d">${esc(d)}</span><span class="d">${f} seguidores</span></div>`).join("")+`</div></div>`).join("");document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",()=>{
   const t=b.dataset.copy;
-  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(()=>{const o=b.textContent;b.textContent="Copiado";setTimeout(()=>b.textContent=o,1500);}).catch(()=>{b.textContent=t;});
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(()=>{const o=b.textContent;b.textContent=b.classList.contains("navshare")?"¡Enlace copiado!":"Copiado";setTimeout(()=>b.textContent=o,1500);}).catch(()=>{b.textContent=t;});
 }));
 render();
 </script>
 
-<script>
-(function(){
-  // Enlace público de la guía. Si la web está subida a internet, se usa su propia dirección.
-  const PUBLIC_URL = "https://oscarcarcedo.github.io/disfruta-sin-gluten/";
-  const url = location.protocol.startsWith("http") ? location.href.split("#")[0] : PUBLIC_URL;
-  const text = "Disfruta de la vida sin gluten: guía de sitios para comer sin gluten en Gipuzkoa, Euskadi, Burgos y España";
-  const toast = m => { const t=document.getElementById("toast"); t.textContent=m; setTimeout(()=>t.textContent="",4000); };
-  document.getElementById("btn-wa").href = "https://wa.me/?text=" + encodeURIComponent(text + " " + url);
-  document.getElementById("btn-share").addEventListener("click", async () => {
-    if (navigator.share) { try { await navigator.share({title:document.title, text, url}); return; } catch(e){ if (e && e.name === "AbortError") return; } }
-    if (navigator.clipboard) { navigator.clipboard.writeText(url).then(()=>toast("Enlace copiado: pégalo en WhatsApp"), ()=>toast(url)); }
-    else toast(url);
-  });
-})();
-</script>
 </body>
 </html>
