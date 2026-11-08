@@ -171,7 +171,12 @@ section[aria-labelledby="h-celi"] .sub{font-size:17px;color:var(--ink)}
 .celi-link{justify-self:start;display:inline-flex;align-items:center;gap:6px;background:var(--star);color:#1b1400;font-weight:800;font-size:16px;text-decoration:none;border-radius:999px;padding:10px 18px;min-height:44px}
 .celi-link:hover{filter:brightness(1.08)}/* --- Ajustes: hueco bajo el menú y botón Compartir --- */
 [id]{scroll-margin-top:calc(var(--navh,64px) + 12px)}
-.topnav .navshare{background:var(--star);color:#1b1400;border:0;font-size:14px;font-weight:800;padding:7px 14px;border-radius:999px;min-height:36px}</style>
+.topnav .navshare{background:var(--star);color:#1b1400;border:0;font-size:14px;font-weight:800;padding:7px 14px;border-radius:999px;min-height:36px}/* --- Menú: sin amarillo al pulsar --- */
+.topnav a:hover,.topnav a:focus-visible{background:rgba(255,255,255,.1);color:var(--sea-ink)}
+.topnav a[href="#h-celi"]:hover,.topnav a[href="#h-celi"]:focus-visible{background:#bfe8cc;color:#0d3b28}
+.topnav a:focus-visible,.topnav button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (hover:hover){.topnav a:hover{background:rgba(255,255,255,.22)}.topnav a[href="#h-celi"]:hover{background:#a6dfb8}}
+.topnav a,.topnav button{-webkit-tap-highlight-color:transparent}</style>
 
 <style>
 html{-webkit-text-size-adjust:100%}
