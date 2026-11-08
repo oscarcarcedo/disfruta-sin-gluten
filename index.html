@@ -72,7 +72,7 @@ header.top .hero-text{display:grid;gap:14px;min-width:0}
 .topnav a{flex:none;color:var(--sea-ink);text-decoration:none;font-weight:700;font-size:14px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);white-space:nowrap}
 .topnav a:hover,.topnav a:focus-visible{background:var(--star);color:#1b1400}
 [id]{scroll-margin-top:64px}
-@media (max-width:640px){.rows{display:grid;gap:6px}.group{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;padding-bottom:2px}.group::-webkit-scrollbar{display:none}.group .chip{flex:none}.count{font-size:13px}}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+@media (max-width:640px){.rows{display:grid;gap:6px}.group{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;padding-bottom:2px}.group::-webkit-scrollbar{display:none}.group .chip{flex:none}.count{font-size:13px}}.news-tag.alerta{background:var(--s2bg);color:var(--s2)}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 h1{font-size:clamp(30px,6vw,52px);font-weight:800;line-height:1.02}
 .lead{max-width:62ch;font-size:17px;opacity:.95;margin:0}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
@@ -188,7 +188,6 @@ img{max-width:100%}[hidden]{display:none!important}
 </nav>
 <div class="bar" id="buscar">
   <div class="wrap">
-    <div class="search"><input id="q" type="search" placeholder="Busca un sitio, barrio o comida (pizza, churros…)" aria-label="Buscar"></div>
     <div class="rows">
       <div class="group" id="g-zona"><span class="lab">Zona</span></div>
       <div class="group" id="g-cat"><span class="lab">Para</span></div>
@@ -258,7 +257,7 @@ img{max-width:100%}[hidden]{display:none!important}
 
     <section aria-labelledby="h-news">
       <h2 id="h-news">Noticias y novedades</h2>
-      <p class="sub">Lo más destacado de las cuentas sin gluten que seguimos, resumido. Pulsa "Ver publicación" para verlo en Instagram. Se actualiza cada mes.</p>
+      <p class="sub">Lo más destacado de Instagram, TikTok y noticias de internet, resumido con nuestras palabras. Se actualiza cada mes y se muestran las 20 más recientes.</p>
       <div class="news" id="news"></div>
       <button class="chip news-more" id="news-more" type="button" hidden>Ver más novedades</button>
     </section>
@@ -430,7 +429,7 @@ const SO=[
  ["@glutenfreesister","Sin gluten por el mundo: viajes","15.000","https://www.instagram.com/glutenfreesister/","España"],
  ["@singlumadrid","Mapa de Madrid sin gluten","14.000","https://www.instagram.com/singlumadrid/","España"],
  ["@crispyglutenfree","Recetas sin gluten","8.600","https://www.instagram.com/crispyglutenfree/","España"],
- ["@asturceliaca","Sin gluten en Asturias","6.100","https://www.instagram.com/asturceliaca/","España"],
+ ["@singlucetas (TikTok)","Elena, celíaca: recetas sin gluten y pintxos. 1 millón de \"me gusta\"","88.400","https://www.tiktok.com/@singlucetas","España"], ["@asturceliaca","Sin gluten en Asturias","6.100","https://www.instagram.com/asturceliaca/","España"],
  ["@glutenfreedonostia","Comer sin gluten en Donostia (sin publicar desde 2025)","1.158","https://www.instagram.com/glutenfreedonostia/","Euskadi"],
  ["@singlucetas","Pintxos sin gluten (sin publicar desde 2025)","3.680","https://www.instagram.com/singlucetas/","Euskadi"]];
 const TYPE={5:["Todo sin gluten","t5"],4:["Certificado","t4"],3:["Cocinan aparte","t3"],2:["Preguntar antes","t2"]};
@@ -453,7 +452,6 @@ function chips(id,list,key){
 }
 chips("g-zona",ZONAS,"z");chips("g-cat",CATS,"c");chips("g-min",MINS,"min");
 document.getElementById("kids").addEventListener("click",()=>{st.kids=!st.kids;render();});
-document.getElementById("q").addEventListener("input",e=>{st.q=e.target.value;render();});
 
 function fact(label,val){return val?`<div><small>${label}</small><strong>${esc(val)}</strong></div>`:`<div><small>${label}</small><strong>—</strong></div>`;}
 function render(){
@@ -486,7 +484,11 @@ const NEWS=[
  ["2026-11-06","@celiacoseuskadi","Talleres de roscón de Reyes sin gluten","Para preparar la Navidad: dos talleres en Vitoria para aprender a hacer roscón sin gluten, el 14 de noviembre y el 12 de diciembre.","https://www.instagram.com/celiacoseuskadi/p/DfZVPFWl2_0/",""],
  ["2026-11-05","@bilbaosingluten","Asador Los Nietos (Briones, La Rioja)","Casi toda la carta es apta o se adapta, y lo describen como muy seguro. Menús de 35 a 50 €. No está avalado por EZE: preguntad siempre.","https://www.instagram.com/bilbaosingluten/p/DfXo1L1kYuk/",""],
  ["2026-11-04","@celiacosburgos","Jornadas sobre enfermedades autoinmunes en Burgos","El martes 17 de noviembre a las 17:30, en el Centro Sociosanitario Graciliano Urbaneja: charla sobre enfermedades autoinmunes del aparato digestivo.","https://www.instagram.com/celiacosburgos/p/DfUpyVFsk9-/",""],
- ["2026-11-03","@celiacoseuskadi","FACE pide la ley de ayudas para celíacos","La federación pide a los partidos que la ley de compensación económica sea una prioridad en la próxima legislatura.","https://www.instagram.com/celiacoseuskadi/p/DfSDWBZlcQb/",""],
+ ["2026-11-04","Asociación de Celíacos y Sensibles al Gluten (web)","Un espacio infantil donde todo es sin gluten","El Bosque de las Luciérnagas (Madrid), espacio para niños, se suma como colaborador: allí todo es sin gluten.","https://www.asociaciondeceliacos.org/noticias/",""],
+ ["2026-10-30","Caminar sin gluten (web)","Programa especial de \"Celíacos en Directo\"","El 13 de noviembre, de 18:00 a 20:00, el programa celebra 10 años con una emisión especial en YouTube.","https://www.caminarsingluten.com/2026/10/celiacos-en-directo-realiza-un-programa.html",""],
+ ["2026-10-05","Asociación de Celíacos y Sensibles al Gluten (web)","Alerta: gluten en tostadas Santiveri","Se ha detectado gluten en las tostadas de trigo sarraceno de Santiveri. No las compréis y revisad las que tengáis en casa.","https://www.asociaciondeceliacos.org/noticias/","Alerta"],
+ ["2026-09-30","Asociación de Celíacos y Sensibles al Gluten (web)","LaLina, en Madrid, firma acuerdo con la asociación","El restaurante de tapas LaLina, 100% sin gluten, tiene ahora acuerdo de colaboración con la asociación.","https://www.asociaciondeceliacos.org/noticias/",""],
+ ["2026-09-02","Asociación de Celíacos y Sensibles al Gluten (web)","Alerta: gluten en salsas etiquetadas \"sin gluten\"","La agencia de seguridad alimentaria (AESAN) avisó de gluten en unas salsas que ponían \"sin gluten\". Mirad la alerta para saber cuáles.","https://www.asociaciondeceliacos.org/noticias/","Alerta"], ["2026-11-03","@celiacoseuskadi","FACE pide la ley de ayudas para celíacos","La federación pide a los partidos que la ley de compensación económica sea una prioridad en la próxima legislatura.","https://www.instagram.com/celiacoseuskadi/p/DfSDWBZlcQb/",""],
  ["2026-11-02","@donosstia_singluten","Miriam vuelve a publicar","Tras unos meses sin publicar, arranca su \"temporada 2\" con nuevos sitios de Donostia.","https://www.instagram.com/donosstia_singluten/reel/DfQD9dDNQpv/",""],
  ["2026-10-29","@bilbaosingluten","Grosso Napoletano Bilbao, 100% sin gluten","Pizzería toda sin gluten en Iparraguirre 15. Para ellos, la mejor masa sin gluten. Unos 25–35 € por persona.","https://www.instagram.com/bilbaosingluten/reel/DfFpMaqRlHd/",""],
  ["2026-10-08","@celiacosburgos","Taller de queso de oveja en Oquillas","La asociación de Burgos organizó un taller para hacer queso, con visita a la quesería y cata (25 de octubre).","https://www.instagram.com/celiacosburgos/p/DeNfO2jsau1/",""],
@@ -497,8 +499,6 @@ const NEWS=[
  ["2026-05-29","@donosstia_singluten","Isla Sicilia, de sus pizzerías favoritas","Tiene dos cocinas independientes y está avalada por la asociación EZE. Recomienda la pizza paraíso y la pinsa de gorgonzola.","https://www.instagram.com/donosstia_singluten/reel/DY7sTcJNQkA/",""],
  ["2026-05-27","@donosstia_singluten","Día Nacional del Celíaco","Su mensaje: \"No pasa nada por un poquito\". Sí pasa. La celiaquía no es una moda ni una dieta.","https://www.instagram.com/donosstia_singluten/p/DY1ypsDjV1Z/",""],
  ["2026-05-17","@donosstia_singluten","Bar Campus (Amara), un gesto bonito","En día de partido no hacían bocadillos sin gluten, pero le prepararon uno por encargo. Merece la pena llamar antes.","https://www.instagram.com/donosstia_singluten/p/DYb7xynjR6l/",""],
- ["2026-05-03","@burgossingluten","Panadería sin gluten en Frómista","Sumendi, en Frómista (Palencia), es una panadería sin gluten. Recomiendan sus napolitanas.","https://www.instagram.com/burgossingluten/reel/DX42O5gMDO_/",""],
- ["2026-05-15","@donosstia_singluten","Veritas en Donostia","Supermercado ecológico con productos sin gluten. Tiene 3 tiendas en Donostia: Centro, Gros y Antiguo.","https://www.instagram.com/donosstia_singluten/reel/DYXpLTrN4xk/","Colaboración pagada"]
 ];
 NEWS.sort((a,b)=>b[0].localeCompare(a[0]));
 const MESES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
@@ -507,9 +507,9 @@ function renderNews(all){
   const list=all?NEWS:NEWS.slice(0,6);
   box.innerHTML=list.map(([d,acc,t,x,u,tag])=>{const [y,m,dd]=d.split("-");
     return `<article class="news-item"><div class="news-date">${+dd}<small>${MESES[+m-1]} ${y}</small></div>
-      <div class="news-acc"><a href="https://www.instagram.com/${acc.slice(1)}/" target="_blank" rel="noopener">${esc(acc)}</a>${tag?`<span class="news-tag">${esc(tag)}</span>`:""}</div>
+      <div class="news-acc">${acc.startsWith("@")?`<a href="${u.includes("tiktok.com")?"https://www.tiktok.com/@":"https://www.instagram.com/"}${acc.slice(1)}" target="_blank" rel="noopener">${esc(acc)}</a>`:esc(acc)}${tag?`<span class="news-tag${tag==="Alerta"?" alerta":""}">${esc(tag)}</span>`:""}</div>
       <div class="news-t">${esc(t)}</div>
-      <p class="news-x">${esc(x)} <a href="${u}" target="_blank" rel="noopener">Ver publicación</a></p></article>`;}).join("");
+      <p class="news-x">${esc(x)} <a href="${u}" target="_blank" rel="noopener">${acc.startsWith("@")?"Ver publicación":"Leer noticia"}</a></p></article>`;}).join("");
   more.hidden=all||NEWS.length<=6;
 }
 document.getElementById("news-more").addEventListener("click",()=>renderNews(true));
